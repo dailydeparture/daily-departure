@@ -206,19 +206,24 @@ const todayNum=()=>Math.max(1,Math.floor((Date.now()-DAY0)/86400000)+1);
 function seeded(n){let s=(n*2654435761)%2147483647||1;return()=>(s=(s*16807)%2147483647)/2147483647}
 // Fisher-Yates with the daily seed: same order in every browser (sort with a random comparator is engine-specific).
 function shuffleSeeded(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function dayPrompts(day){
-  // Categories are interleaved so a day mixes topics.
-  // A cycle deals the whole bank once, 7 a day, then reshuffles.
-  const L=Math.max(1,Math.floor(BANK.length/7));const c=Math.floor((day-1)/L),k=(day-1)%L;const r=seeded(c*7919+13);
+function cycleDays(){
+  // Cycle 0's deal, fixed. Later cycles reuse the same order, shifted a few places, so every question
+  // comes back roughly every L days (never sooner) but in a different group of seven.
+  if(cycleDays.memo)return cycleDays.memo;
+  const L=Math.max(1,Math.floor(BANK.length/7));let calls=0;const r0=seeded(13),r=()=>{calls++;return r0()};
   const grp=q=>q.cat.startsWith('Branded')?'Branded':q.cat;
   const groups={};BANK.forEach(q=>(groups[grp(q)]=groups[grp(q)]||[]).push(q));
   Object.values(groups).forEach(g=>shuffleSeeded(g,r));
   const seq=[];Object.values(groups).forEach(g=>g.forEach((q,i)=>seq.push([(i+r())/g.length,q])));seq.sort((x,y)=>x[0]-y[0]);for(let i=0;i<seq.length;i++)seq[i]=seq[i][1];
-  // At most 2 expert questions a day, spread across the cycle; Q1 is always the most open question.
   const days=Array.from({length:L},()=>[]);const hard=seq.filter(isHard),rest=seq.filter(x=>!isHard(x));
   hard.forEach((x,i)=>{const d=i%L;if(days[d].length<2&&i<2*L)days[d].push(x);else rest.push(x)});
   let d=0;for(const x of rest){while(d<L&&days[d].length>=7)d++;if(d>=L)break;days[d].push(x)}
-  const pick=days[k].slice(0,7);const ease=x=>x.a.filter(a=>a[1]===1).length*(isHard(x)?0:1);
+  return cycleDays.memo={L,flat:days.flatMap(x=>x.slice(0,7)),calls};
+}
+function dayPrompts(day){
+  const {L,flat,calls}=cycleDays();const c=Math.floor((day-1)/L),k=(day-1)%L;const n=flat.length;
+  const s=(c*3)%n;const pick=[];for(let j=0;j<7;j++)pick.push(flat[(k*7+j+s)%n]);
+  let r;if(c===0){r=seeded(13);for(let i=0;i<calls;i++)r()}else r=seeded(c*7919+13+k);const ease=x=>x.a.filter(a=>a[1]===1).length*(isHard(x)?0:1);
   shuffleSeeded(pick,r);const first=pick.reduce((b,x)=>ease(x)>ease(b)?x:b,pick[0]);
   return [first,...pick.filter(x=>x!==first)];
 }
@@ -526,7 +531,7 @@ async function fetchBoard(day){try{await (window.ddRec||Promise.resolve());
   const r=await fetch(DB.url+'rpc/day_board',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_day:day,p_player:playerId()})});
   if(!r.ok)return null;return await r.json()}catch(e){return null}}
 // Update check: if a newer version is published, reload while the player is on the home screen.
-const BUILD='1795364980';
+const BUILD='1795365419';
 async function checkUpdate(){try{if(!/^https?:/.test(location.protocol)||/claude/.test(location.host))return;
   const t=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text());
   const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&typeof view!=='undefined'&&view==='home')location.reload()}catch(e){}}
