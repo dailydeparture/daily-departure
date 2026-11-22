@@ -498,12 +498,12 @@ const DB={url:'https://ictoubtwghtmpstavhxe.supabase.co/rest/v1/',key:'sb_publis
 function playerId(){try{let p=localStorage.getItem('dd-pid');if(!p){p=(crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)}));localStorage.setItem('dd-pid',p)}return p}catch(e){return null}}
 function newId(){return crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)})}
 async function dbPost(table,rows){const r=await fetch(DB.url+table,{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(rows)});if(!r.ok)throw new Error(table+' '+r.status)}
-async function recordFlight(mode,day,score,res,qs){
+async function recordFlight(mode,day,score,res,qs,miss){
   if(typeof TEST!=='undefined'&&TEST)return; // test-mode games never count
   const pid=playerId();if(!pid)return;const id=newId();
   try{
     await dbPost('plays',[{id,player_id:pid,day,mode,score:Math.round(score),tiers:res.map(r=>r.tier||0)}]);
-    await dbPost('answers',res.map((r,i)=>({play_id:id,q_id:qs[i].id,stage:i+1,input:(r.input||'').slice(0,80)||null,matched:r.name?r.name.slice(0,120):null,tier:r.tier||0,fuzzy:!!r.fuzzy})));
+    await dbPost('answers',res.map((r,i)=>({play_id:id,q_id:qs[i].id,stage:i+1,input:(r.input||'').slice(0,80)||null,matched:r.name?r.name.slice(0,120):null,tier:r.tier||0,fuzzy:!!r.fuzzy,kind:'final'})).concat((miss||[]).map(([i,v])=>({play_id:id,q_id:qs[i].id,stage:i+1,input:v,matched:null,tier:0,fuzzy:false,kind:'miss'}))));
   }catch(e){/* offline, blocked or already recorded today: ignore */}
 }
 
@@ -657,12 +657,13 @@ function ask(){view='q';clearReveal();revealDone=false;const i=st.i,q=Q[i],s=STA
     const hue=Math.round(120*left/30),col=`hsl(${hue},72%,55%)`;const sc=$('secs');if(!sc)return;sc.textContent='0:'+String(sN).padStart(2,'0');sc.style.color=col;
     const b=$('bar');b.style.width=(left/30*100)+'%';b.style.background=col;
     if(left<=0)submit($('ans').value,true)},100)}
+function noteMiss(v){if(!v)return;st.miss=st.miss||[];if(st.miss.filter(x=>x[0]===st.i).length<10&&!st.miss.some(x=>x[0]===st.i&&x[1].toLowerCase()===v.toLowerCase()))st.miss.push([st.i,v.slice(0,80)])}
 function submit(val,timeout){const q=Q[st.i];const v=val.trim();const m=v?match(q,v):null;const er=$('err'),inp=$('ans');
   if(!timeout){
     if(m&&m.excluded){er.innerHTML='<div class="caution"><b>⚠ LONDON IS SAVED FOR LATER</b>Try another capital.</div>';SFX.err();inp.classList.add('warn');inp.select();return}
-    if(m&&m.close){er.innerHTML=`<div class="caution close"><b>◐ “${esc(v.toUpperCase())}” IS CLOSE</b>Be more specific. The clock is still running.</div>`;SFX.err();inp.classList.add('warn');inp.select();return}
-    if(!m){er.innerHTML=`<div class="caution"><b>⚠ “${esc(v.toUpperCase())}” NOT FOUND</b>Retype. The clock is still running.</div>`;SFX.err();inp.classList.add('warn');inp.select();return}
-    if(m.suggest){SFX.err();inp.classList.add('warn');const e=m.suggest[0];pendingSug={v,e};
+    if(m&&m.close){noteMiss(v);er.innerHTML=`<div class="caution close"><b>◐ “${esc(v.toUpperCase())}” IS CLOSE</b>Be more specific. The clock is still running.</div>`;SFX.err();inp.classList.add('warn');inp.select();return}
+    if(!m){noteMiss(v);er.innerHTML=`<div class="caution"><b>⚠ “${esc(v.toUpperCase())}” NOT FOUND</b>Retype. The clock is still running.</div>`;SFX.err();inp.classList.add('warn');inp.select();return}
+    if(m.suggest){noteMiss(v);SFX.err();inp.classList.add('warn');const e=m.suggest[0];pendingSug={v,e};
       er.innerHTML=`<div class="caution"><b>“${esc(v.toUpperCase())}” ISN'T ON FILE. DID YOU MEAN:</b><button type="button" class="sugone" id="sg"><span>${esc(e.name)}</span><small>TAP OR PRESS ENTER ↵</small></button><span class="lbl">OR KEEP TYPING · CLOCK STILL RUNNING</span></div>`;
       $('sg').onclick=acceptSug;return}}
   clearInterval(timer);
@@ -697,7 +698,7 @@ function flyUp(r,seg){const pts=PTS[r.tier],h=$('hdr');
   requestAnimationFrame(()=>requestAnimationFrame(()=>{f.style.transform=`translate(${b.left+b.width/2-(a.left+a.width/2)}px,${b.top-a.top}px) scale(.6)`;f.style.opacity='.2'}));
   RT.push(setTimeout(()=>{f.remove();SFX.coin();const from=score()-pts,to=score(),t0=performance.now();
     const tick=()=>{const k=Math.min(1,(performance.now()-t0)/500);setScore(Math.round(from+(to-from)*k));if(k<1&&!revealDone)requestAnimationFrame(tick);else if(!revealDone)done()};tick()},880))}
-function finish(){st.phase='end';const p=score();recordFlight(PRACTICE?'bonus':'daily',DAY,p,st.res,Q);if(PRACTICE){st.newUn=[];wipe(end);return}const nu=LIVERIES.filter(L=>!HANG.un.includes(L.id)&&L.test(st.res,p));nu.forEach(L=>HANG.un.push(L.id));saveHang();st.newUn=nu.map(L=>L.id);save();
+function finish(){st.phase='end';const p=score();recordFlight(PRACTICE?'bonus':'daily',DAY,p,st.res,Q,st.miss||[]);if(PRACTICE){st.newUn=[];wipe(end);return}const nu=LIVERIES.filter(L=>!HANG.un.includes(L.id)&&L.test(st.res,p));nu.forEach(L=>HANG.un.push(L.id));saveHang();st.newUn=nu.map(L=>L.id);save();
   STATS.days[DAY]={score:p,rank:rankOf(p)};saveStats();wipe(end)}
 function tierList(q,r,k){const xs=q.list.filter(e=>e.tier===k);const mine=xs.find(e=>e.name===r.name);const show=[...(mine?[mine]:[]),...xs.filter(e=>e!==mine).slice(0,mine?5:6)];
   return show.map(e=>`<div class="ans ${r.name===e.name?'me':''}"><span>${esc(e.name)}</span><span style="color:${TIER_COL[k]}">${r.name===e.name?'YOU':''}</span></div>`).join('')+(xs.length>show.length?`<div class="muted mono" style="font-size:11px">+${xs.length-show.length} MORE</div>`:'')+(xs.length?'':'<div class="muted">None on file.</div>')}
