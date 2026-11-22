@@ -193,20 +193,22 @@ function match(q,inp){
 const DAY0=Date.UTC(2026,10,20);
 const todayNum=()=>Math.max(1,Math.floor((Date.now()-DAY0)/86400000)+1);
 function seeded(n){let s=(n*2654435761)%2147483647||1;return()=>(s=(s*16807)%2147483647)/2147483647}
+// Fisher-Yates with the daily seed: same order in every browser (sort with a random comparator is engine-specific).
+function shuffleSeeded(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function dayPrompts(day){
   // Categories are interleaved so a day mixes topics.
   // A cycle deals the whole bank once, 7 a day, then reshuffles.
   const L=Math.max(1,Math.floor(BANK.length/7));const c=Math.floor((day-1)/L),k=(day-1)%L;const r=seeded(c*7919+13);
   const grp=q=>q.cat.startsWith('Branded')?'Branded':q.cat;
   const groups={};BANK.forEach(q=>(groups[grp(q)]=groups[grp(q)]||[]).push(q));
-  Object.values(groups).forEach(g=>g.sort(()=>r()-0.5));
+  Object.values(groups).forEach(g=>shuffleSeeded(g,r));
   const seq=[];Object.values(groups).forEach(g=>g.forEach((q,i)=>seq.push([(i+r())/g.length,q])));seq.sort((x,y)=>x[0]-y[0]);for(let i=0;i<seq.length;i++)seq[i]=seq[i][1];
   // At most 2 expert questions a day, spread across the cycle; Q1 is always the most open question.
   const days=Array.from({length:L},()=>[]);const hard=seq.filter(isHard),rest=seq.filter(x=>!isHard(x));
   hard.forEach((x,i)=>{const d=i%L;if(days[d].length<2&&i<2*L)days[d].push(x);else rest.push(x)});
   let d=0;for(const x of rest){while(d<L&&days[d].length>=7)d++;if(d>=L)break;days[d].push(x)}
   const pick=days[k].slice(0,7);const ease=x=>x.a.filter(a=>a[1]===1).length*(isHard(x)?0:1);
-  pick.sort((x,y)=>r()-0.5);const first=pick.reduce((b,x)=>ease(x)>ease(b)?x:b,pick[0]);
+  shuffleSeeded(pick,r);const first=pick.reduce((b,x)=>ease(x)>ease(b)?x:b,pick[0]);
   return [first,...pick.filter(x=>x!==first)];
 }
 const EXPERT=new Set(['D50','D79','D85','D83','D84','C76','A56','E97','E99','B67','G132','G139','D30','D32','A05','D31','B19','E101','E121','E118','D86','C77','G138']);
