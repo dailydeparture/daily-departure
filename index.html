@@ -124,6 +124,7 @@ footer button{background:none;border:1px solid #26354f;border-radius:3px;font-fa
 .tabs{display:flex;gap:4px;margin:6px 0}.tab{flex:1;font:inherit;font-size:11px;padding:6px 0;background:#172236;color:#a3b2c8;border:1px solid #26354f;border-radius:4px;cursor:pointer}.tab.on{background:var(--c);color:#0c1320;border-color:var(--c);font-weight:700}
 .namerow{display:flex;align-items:center;gap:8px;margin:10px 0;padding:8px 10px;background:#121b2c;border:1px solid #26354f;border-radius:6px;flex-wrap:wrap}.namerow b{color:#e6ecf5;font-size:15px;flex:1}.namerow .lbl{margin:0}.nameform{display:block}.nameform label{display:block;margin-bottom:6px}.nameform label small{display:block;color:#7f90aa;font-size:11px;margin-top:2px}.nmline{display:flex;gap:6px}.nmline input{flex:1;min-width:0;font:inherit;font-size:16px;padding:8px;background:#0c1320;color:#e6ecf5;border:1px solid #26354f;border-radius:4px}.namebtn{font:inherit;font-size:11px;padding:8px 12px;background:#172236;color:#62c6ee;border:1px solid #26354f;border-radius:4px;cursor:pointer}.nmerr{color:#f0b44a;font-size:12px;margin-top:4px;min-height:0}
 .lbsum{margin:4px 0 8px;font-size:14px}.lbrow{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid #1c2840;font-size:14px}.lbrow.me{background:rgba(240,180,74,.12);border-radius:4px}.lbrank{width:22px;color:#a3b2c8;font-family:'B612 Mono',monospace;text-align:right}.lbname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lbname small{color:#f0b44a;font-size:11px;margin-left:4px}.lbtiers{display:flex;gap:2px}.lbtiers i{display:block;width:7px;height:12px;border-radius:1px}.lbscore{width:40px;text-align:right;font-family:'B612 Mono',monospace;color:#f0b44a}.lbgap{text-align:center;color:#7f90aa;line-height:1}.lbhint{margin-top:8px;font-size:12px;color:#7f90aa}.lbload{font-size:13px}
+.lbname-ask{display:block;margin:6px 0 10px;padding:10px;border:1px solid #f0b44a;border-radius:6px;background:rgba(240,180,74,.08)}.lbname-ask b{display:block;color:#f0b44a;font-size:14px}.lbname-ask span{display:block;font-size:12px;color:#a3b2c8;margin:2px 0 8px}
 </style>
 </head>
 <body>
@@ -519,12 +520,16 @@ async function fetchBoard(day){try{await (window.ddRec||Promise.resolve());
   const r=await fetch(DB.url+'rpc/day_board',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_day:day,p_player:playerId()})});
   if(!r.ok)return null;return await r.json()}catch(e){return null}}
 // Update check: if a newer version is published, reload while the player is on the home screen.
-const BUILD='1795362326';
+const BUILD='1795363127';
 async function checkUpdate(){try{if(!/^https?:/.test(location.protocol)||/claude/.test(location.host))return;
   const t=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text());
   const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&typeof view!=='undefined'&&view==='home')location.reload()}catch(e){}}
 window.addEventListener('load',()=>setTimeout(checkUpdate,1500));
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkUpdate()});
+
+async function dbSetName(day,name){try{await (window.ddRec||Promise.resolve());const pid=playerId();if(!pid)return 0;
+  const r=await fetch(DB.url+'rpc/set_name',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_player:pid,p_day:day,p_name:name})});
+  return r.ok?await r.json():0}catch(e){return 0}}
 
 // ================= game data =================
 const TIER_COL=['#8193ad','#a3b2c8','#4fd1ff','#3ddc84','#ffb020','#ff4fd8'];
@@ -636,10 +641,20 @@ function home(){view='home';$('fl').textContent=`KS${100+DAY} JFK › LHR · A32
   const go=d=>{setDay(d);load();wipe(home)};
   if(TEST){$('dp').onclick=()=>go(DAY-1);$('dn').onclick=()=>go(DAY+1);$('dr').onclick=()=>go(1+Math.floor(Math.random()*365));$('dt').onclick=()=>go(todayNum())}
   $('hdr').onclick=testTap;bindName();
-  $('go').onclick=()=>{ac();SFX.board();wipe(done?end:(firstTime()?warmup:brief))};$('bf').onclick=startBonus;$('hg').onclick=()=>{ac();wipe(brief)}}
+  $('go').onclick=()=>{ac();SFX.board();const next=firstTime()?warmup:brief;wipe(done?end:(needName()?()=>askName(next):next))};$('bf').onclick=startBonus;$('hg').onclick=()=>{ac();wipe(brief)}}
 function hangarHTML(){return `<div class="lbl" style="margin-top:12px">HANGAR · ${HANG.un.length} OF ${LIVERIES.length} LIVERIES</div><div class="hangar">${LIVERIES.map(L=>{const un=HANG.un.includes(L.id),on=HANG.eq===L.id;
   return `<button class="liv ${on?'on':''} ${un?'':'lock'}" data-id="${L.id}" ${un?'':'aria-label="Locked livery, tap to see how to unlock"'}><span class="sw" style="background:linear-gradient(90deg,${L.tail} 32%,${L.body||'#f1f3f7'} 32%);border-bottom-color:${L.acc}"></span>${un?L.name.split(' ')[0].toUpperCase()+(on?' ✓':''):'LOCKED'}<small>${un?'':esc(L.how)}</small></button>`}).join('')}</div>`}
 function bindHangar(){document.querySelectorAll('.liv').forEach(b=>b.onclick=()=>{const id=b.dataset.id;if(!HANG.un.includes(id)){livPop(id);return}HANG.eq=id;saveHang();sprites();SFX.board();brief()})}
+function needName(){try{return !getName()&&!localStorage.getItem('dd-name-asked')}catch(e){return false}}
+function askName(next){view='name';setScene(0);tag('CHECK-IN · BOARDING PASS');hdr('CHECK-IN','cyan');stripUI();
+  try{localStorage.setItem('dd-name-asked','1')}catch(e){}
+  panel.innerHTML=`<div class="card"><div class="lbl">BOARDING PASS</div><h1 class="prompt">What should we call you?</h1><p class="qsmall">Your name goes on the daily leaderboard. First name or nickname.</p>
+   <form id="anf" autocomplete="off"><div class="nmline"><input id="an" maxlength="16" placeholder="e.g. Charlie" autocapitalize="words" spellcheck="false" enterkeyhint="go" aria-label="Your name"></div><div id="anerr" class="nmerr" aria-live="polite"></div>
+   <button class="key big go" style="margin-top:10px"><span class="bar g"></span><span class="kl">LET'S GO<small>YOU CAN CHANGE IT LATER</small></span><span class="chev">›</span></button></form></div>
+   <button class="bonuslink" id="ansk">SKIP FOR NOW ›</button>`;
+  const i=$('an');i.focus();
+  $('anf').onsubmit=e=>{e.preventDefault();const r=cleanName(i.value);if(r.err){$('anerr').textContent=r.err;i.select();return}try{localStorage.setItem('dd-name',r.v)}catch(e){}wipe(next)};
+  $('ansk').onclick=()=>wipe(next)}
 function warmup(){view='warm';const q=BANK.find(x=>x.id==='A10')||BANK[0];setScene(0);tag('WARM-UP · NO CLOCK');hdr('PRACTICE','cyan');stripUI();
   panel.innerHTML=`<div class="card wu"><div class="lbl">WARM-UP · NO CLOCK · DOESN'T COUNT</div><p class="qsmall">Try one before the real flight, so you can see how the cabins work.</p>
    <h1 class="prompt">${esc(q.prompt)}</h1>
@@ -738,8 +753,11 @@ async function loadBoard(){const el=$('lb');if(!el)return;const day=DAY;const b=
   const me=b.me,rows=b.top.map(r=>`<div class="lbrow${r.me?' me':''}"><span class="lbrank">${r.rank}</span><span class="lbname">${esc(r.name)}${r.me?' <small>YOU</small>':''}</span><span class="lbtiers">${(r.tiers||[]).map(t=>`<i style="background:${t?TIER_COL[t]:'#26354f'}"></i>`).join('')}</span><span class="lbscore">${r.score}</span></div>`).join('');
   const extra=me&&me.rn>10?`<div class="lbgap">⋮</div><div class="lbrow me"><span class="lbrank">${me.rank}</span><span class="lbname">${esc(me.name)} <small>YOU</small></span><span class="lbtiers">${st.res.map(r=>`<i style="background:${r.tier?TIER_COL[r.tier]:'#26354f'}"></i>`).join('')}</span><span class="lbscore">${me.score}</span></div>`:'';
   const sum=me?`You're <b>#${me.rank}</b> of ${b.total} flyer${b.total===1?'':'s'} today${b.total>1?`, ahead of ${Math.round(100*me.beat/(b.total-1))}% of the others`:''}.`:`${b.total} flyer${b.total===1?'':'s'} so far today.`;
-  const nm=getName()?'':'<div class="lbhint">Add your name on the home screen to show up by name.</div>';
-  box.innerHTML=`<div class="lbl">TODAY'S LEADERBOARD</div><p class="lbsum">${sum}</p>${rows||'<div class="muted">No scores yet.</div>'}${extra}${nm}`}
+  const nm='';
+  const ask=getName()?'':`<form class="lbname-ask" id="lbf" autocomplete="off"><b>Add your name to today's board</b><span>You're showing as Anonymous flyer.</span><div class="nmline"><input id="lbn" maxlength="16" placeholder="First name or nickname" autocapitalize="words" spellcheck="false" enterkeyhint="done" aria-label="Your name"><button class="namebtn">ADD</button></div><div id="lberr" class="nmerr" aria-live="polite"></div></form>`;
+  box.innerHTML=`<div class="lbl">TODAY'S LEADERBOARD</div>${ask}<p class="lbsum">${sum}</p>${rows||'<div class="muted">No scores yet.</div>'}${extra}`;
+  const f=$('lbf');if(f)f.onsubmit=async e=>{e.preventDefault();const r=cleanName($('lbn').value);if(r.err){$('lberr').textContent=r.err;return}
+    try{localStorage.setItem('dd-name',r.v)}catch(e){}$('lberr').textContent='Saving…';await dbSetName(day,r.v);loadBoard()}}
 function planeMap(rank){const seat=seatOf(rank);const W=362,H=190,cy=95,half=26,cols=24,x1=292,pitch=(x1-22)/cols;let p='';
   p+=`<path d="M175 ${cy-half} L120 8 L140 8 L215 ${cy-half} Z" fill="#1a2538" stroke="#3a4d6e"/><path d="M175 ${cy+half} L120 ${H-8} L140 ${H-8} L215 ${cy+half} Z" fill="#1a2538" stroke="#3a4d6e"/>`;
   p+=`<path d="M30 ${cy-14} L8 ${cy-48} L20 ${cy-48} L52 ${cy-14} Z" fill="#1a2538" stroke="#3a4d6e"/><path d="M30 ${cy+14} L8 ${cy+48} L20 ${cy+48} L52 ${cy+14} Z" fill="#1a2538" stroke="#3a4d6e"/>`;
