@@ -122,6 +122,7 @@ footer button{background:none;border:1px solid #26354f;border-radius:3px;font-fa
 .testtoast{position:fixed;left:50%;top:12px;transform:translateX(-50%);background:#172236;border:1px solid #62c6ee;color:#e6ecf5;font-family:'B612 Mono',monospace;font-size:12px;padding:8px 12px;border-radius:6px;z-index:60}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 .tabs{display:flex;gap:4px;margin:6px 0}.tab{flex:1;font:inherit;font-size:11px;padding:6px 0;background:#172236;color:#a3b2c8;border:1px solid #26354f;border-radius:4px;cursor:pointer}.tab.on{background:var(--c);color:#0c1320;border-color:var(--c);font-weight:700}
+.namerow{display:flex;align-items:center;gap:8px;margin:10px 0;padding:8px 10px;background:#121b2c;border:1px solid #26354f;border-radius:6px;flex-wrap:wrap}.namerow b{color:#e6ecf5;font-size:15px;flex:1}.namerow .lbl{margin:0}.nameform{display:block}.nameform label{display:block;margin-bottom:6px}.nameform label small{display:block;color:#7f90aa;font-size:11px;margin-top:2px}.nmline{display:flex;gap:6px}.nmline input{flex:1;min-width:0;font:inherit;font-size:16px;padding:8px;background:#0c1320;color:#e6ecf5;border:1px solid #26354f;border-radius:4px}.namebtn{font:inherit;font-size:11px;padding:8px 12px;background:#172236;color:#62c6ee;border:1px solid #26354f;border-radius:4px;cursor:pointer}.nmerr{color:#f0b44a;font-size:12px;margin-top:4px;min-height:0}
 </style>
 </head>
 <body>
@@ -502,7 +503,7 @@ async function recordFlight(mode,day,score,res,qs,miss){
   if(typeof TEST!=='undefined'&&TEST)return; // test-mode games never count
   const pid=playerId();if(!pid)return;const id=newId();
   try{
-    await dbPost('plays',[{id,player_id:pid,day,mode,score:Math.round(score),tiers:res.map(r=>r.tier||0)}]);
+    await dbPost('plays',[{id,player_id:pid,day,mode,score:Math.round(score),display_name:(typeof getName==='function'&&getName())||null,tiers:res.map(r=>r.tier||0)}]);
     await dbPost('answers',res.map((r,i)=>({play_id:id,q_id:qs[i].id,stage:i+1,input:(r.input||'').slice(0,80)||null,matched:r.name?r.name.slice(0,120):null,tier:r.tier||0,fuzzy:!!r.fuzzy,kind:'final'})).concat((miss||[]).map(([i,v])=>({play_id:id,q_id:qs[i].id,stage:i+1,input:v,matched:null,tier:0,fuzzy:false,kind:'miss'}))));
   }catch(e){/* offline, blocked or already recorded today: ignore */}
 }
@@ -587,9 +588,22 @@ function setScore(v){hdr('SCORE '+v,'amber')}
 function clearReveal(){RT.forEach(clearTimeout);RT=[];skipReveal=null;document.querySelectorAll('.fly').forEach(f=>f.remove())}
 
 // ================= screens =================
+const BADWORDS=['fuck','shit','cunt','bitch','dick','cock','pussy','wank','twat','nigg','fag','slut','whore','rape','nazi','hitler','penis','vagina','arse','bastard','retard','spunk','porn','sex'];
+function getName(){try{return localStorage.getItem('dd-name')||''}catch(e){return ''}}
+function cleanName(v){v=(v||'').replace(/[^A-Za-z0-9 _.\-']/g,'').replace(/\s+/g,' ').trim().slice(0,16);
+  if(v.length<2)return {err:'Use at least 2 letters or numbers.'};
+  const flat=v.toLowerCase().replace(/[^a-z]/g,'').replace(/0/g,'o');
+  if(BADWORDS.some(w=>flat.includes(w)))return {err:'Please pick a different name.'};
+  return {v}}
+function nameHTML(){const n=getName();
+  return n?`<div class="namerow"><span class="lbl">FLYING AS</span><b>${esc(n)}</b><button type="button" class="namebtn" id="nmed">CHANGE</button></div>`
+  :`<form class="namerow nameform" id="nmf" autocomplete="off"><label for="nm" class="lbl">YOUR NAME <small>SHOWN ON LEADERBOARDS · FIRST NAME OR NICKNAME</small></label><div class="nmline"><input id="nm" maxlength="16" placeholder="e.g. Charlie" autocapitalize="words" spellcheck="false" enterkeyhint="done"><button class="namebtn">SAVE</button></div><div id="nmerr" class="nmerr" aria-live="polite"></div></form>`}
+function bindName(){const ed=$('nmed');if(ed)ed.onclick=()=>{const old=getName();try{localStorage.removeItem('dd-name')}catch(e){}home();setTimeout(()=>{const i=$('nm');if(i){i.value=old;i.focus();i.select()}},50)};
+  const f=$('nmf');if(f)f.onsubmit=e=>{e.preventDefault();const r=cleanName($('nm').value);if(r.err){$('nmerr').textContent=r.err;return}try{localStorage.setItem('dd-name',r.v)}catch(e){}home()}}
 function home(){view='home';$('fl').textContent=`KS${100+DAY} JFK › LHR · A321LR`;clearInterval(timer);clearReveal();setScene(5,0,false,null,true);tag('FLIGHT '+(100+DAY)+' · BOARDING NOW');hdr(new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).toUpperCase(),'green');stripUI();
   const sk=streak(),br=bestRank(),done=st.phase==='end';
   panel.innerHTML=`<p class="tagline">The daily aviation quiz where <span style="color:#ff4fd8">rare answers get you upgraded.</span></p>
+  ${nameHTML()}
   <button class="key big go" id="go"><span class="bar g"></span><span class="kl">${done?'VIEW TODAY\'S RESULTS':'PLAY TODAY\'S FLIGHT'}<small>${done?'SEE WHERE YOU SAT':'7 QUESTIONS · ABOUT 4 MINUTES'}</small></span><span class="chev">›</span></button>
   <button class="bonuslink" id="bf">BONUS FLIGHT: RANDOM QUESTIONS, DOESN'T COUNT ›</button>
   <div class="card"><div class="lbl">HOW TO PLAY</div>
@@ -603,7 +617,7 @@ function home(){view='home';$('fl').textContent=`KS${100+DAY} JFK › LHR · A32
   ${TEST?`<div class="test"><span class="lbl">TEST MODE · FLIGHT ${100+DAY}${DAY===todayNum()?' (TODAY)':''}</span><div class="row"><button class="key sm" id="dp">◀ PREV</button><button class="key sm" id="dr">RANDOM</button><button class="key sm" id="dt">TODAY</button><button class="key sm" id="dn">NEXT ▶</button></div></div>`:''}`;
   const go=d=>{setDay(d);load();wipe(home)};
   if(TEST){$('dp').onclick=()=>go(DAY-1);$('dn').onclick=()=>go(DAY+1);$('dr').onclick=()=>go(1+Math.floor(Math.random()*365));$('dt').onclick=()=>go(todayNum())}
-  $('hdr').onclick=testTap;
+  $('hdr').onclick=testTap;bindName();
   $('go').onclick=()=>{ac();SFX.board();wipe(done?end:(firstTime()?warmup:brief))};$('bf').onclick=startBonus;$('hg').onclick=()=>{ac();wipe(brief)}}
 function hangarHTML(){return `<div class="lbl" style="margin-top:12px">HANGAR · ${HANG.un.length} OF ${LIVERIES.length} LIVERIES</div><div class="hangar">${LIVERIES.map(L=>{const un=HANG.un.includes(L.id),on=HANG.eq===L.id;
   return `<button class="liv ${on?'on':''} ${un?'':'lock'}" data-id="${L.id}" ${un?'':'aria-label="Locked livery, tap to see how to unlock"'}><span class="sw" style="background:linear-gradient(90deg,${L.tail} 32%,${L.body||'#f1f3f7'} 32%);border-bottom-color:${L.acc}"></span>${un?L.name.split(' ')[0].toUpperCase()+(on?' ✓':''):'LOCKED'}<small>${un?'':esc(L.how)}</small></button>`}).join('')}</div>`}
