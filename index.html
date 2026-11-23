@@ -233,7 +233,11 @@ function cappedDeal(day){
   const {flat}=cycleDays();const order=flat.concat(BANK.filter(q=>!flat.includes(q)));
   const H=order.filter(isHard),N=order.filter(x=>!isHard(x));const t=day-CAP_FROM;
   const pick=[H[t%H.length]];for(let j=0;j<6;j++)pick.push(N[(t*6+j)%N.length]);return pick}
-function dayPrompts(day){
+// Hand swaps for a single day (Charlie's call): {day:{outId:inId}}
+const SWAP={4:{C77:'E90'}};
+function dayPrompts(day){const out=dayPrompts0(day),s=SWAP[day];if(!s)return out;
+  return out.map(q=>s[q.id]?BANK.find(x=>x.id===s[q.id]):q)}
+function dayPrompts0(day){
   const {L,flat,calls}=cycleDays();const c=Math.floor((day-1)/L),k=(day-1)%L;const n=flat.length;
   if(day>=CAP_FROM){const pick=cappedDeal(day),r=seeded(day*7919+13);shuffleSeeded(pick,r);
     const ease=x=>ecoN(x)*(isHard(x)?0:1);const first=pick.reduce((b,x)=>ease(x)>ease(b)?x:b,pick[0]);
@@ -554,7 +558,7 @@ async function fetchBoard(day){try{await (window.ddRec||Promise.resolve());
   const r=await fetch(DB.url+'rpc/day_board',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_day:day,p_player:playerId()})});
   if(!r.ok)return null;return await r.json()}catch(e){return null}}
 // Update check: if a newer version is published, reload while the player is on the home screen.
-const BUILD='1795378673';
+const BUILD='1795424456';
 async function checkUpdate(){try{if(!/^https?:/.test(location.protocol)||/claude/.test(location.host))return;
   const t=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text());
   const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&typeof view!=='undefined'&&view==='home')location.reload()}catch(e){}}
