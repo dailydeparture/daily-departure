@@ -124,6 +124,9 @@ footer button{background:none;border:1px solid #26354f;border-radius:3px;font-fa
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.chips span{font-family:'B612 Mono',monospace;font-size:12px;font-weight:700;color:#0c1320;border-radius:4px;padding:4px 7px}
 .plane{width:100%;height:auto;display:block}
 .plane .pax{opacity:0;animation:fillin .25s forwards}
+.wpop{position:fixed;inset:0;z-index:50;background:rgba(6,10,20,.82);display:flex;align-items:center;justify-content:center;padding:20px}
+.wpopcard{background:#121e33;border:2px solid #62c6ee;border-radius:10px;max-width:360px;width:100%;padding:18px 18px 12px;text-align:center}
+.wpopcard h2{margin:6px 0 10px;font-size:20px}.wpopcard p{margin:0 0 10px;font-size:15px;line-height:1.45}.wpopcard .key{width:100%;margin-top:6px}
 .wu .ex{display:flex;justify-content:space-between;font-size:13px;padding:3px 0}
 .testtoast{position:fixed;left:50%;top:12px;transform:translateX(-50%);background:#172236;border:1px solid #62c6ee;color:#e6ecf5;font-family:'B612 Mono',monospace;font-size:12px;padding:8px 12px;border-radius:6px;z-index:60}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -695,15 +698,24 @@ function askName(next){view='name';setScene(0);tag('CHECK-IN · BOARDING PASS');
   const i=$('an');i.focus();
   $('anf').onsubmit=e=>{e.preventDefault();const r=cleanName(i.value);if(r.err){$('anerr').textContent=r.err;i.select();return}try{localStorage.setItem('dd-name',r.v)}catch(e){}wipe(next)};
   $('ansk').onclick=()=>wipe(next)}
-function warmup(){view='warm';const q=BANK.find(x=>x.id==='A10')||BANK[0];setScene(0);tag('WARM-UP · NO CLOCK');hdr('PRACTICE','cyan');stripUI();
-  panel.innerHTML=`<div class="card wu"><div class="lbl">WARM-UP · NO CLOCK · DOESN'T COUNT</div><p class="qsmall">Try one before the real flight, so you can see how the cabins work.</p>
+function warmup(){view='warm';const q=BANK.find(x=>x.id==='A10')||BANK[0];setScene(0);tag('PRACTICE · DOESN\'T COUNT');hdr('PRACTICE','cyan');stripUI();
+  panel.innerHTML=`<div class="card wu"><div class="lbl">PRACTICE · JUST A TEST · DOESN'T COUNT</div><p class="qsmall">Try one before the real flight, so you can see how the cabins work.</p>
    <h1 class="prompt">${esc(q.prompt)}</h1>
    <label for="ans" class="lbl">YOUR ANSWER</label>
    <form id="f" autocomplete="off" class="ansrow"><input id="ans" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go"><button class="key enter">ENTER</button></form>
    <div id="err"></div><div id="wres"></div></div>
    <button class="bonuslink" id="skip">SKIP THE WARM-UP ›</button>`;
-  const inp=$('ans');inp.focus();inp.onkeydown=e=>{if(e.key.length===1||e.key==='Backspace')SFX.key()};
-  const done=()=>{try{localStorage.setItem('dd-warm','1')}catch(e){}startFlight()};$('skip').onclick=done;
+  const inp=$('ans');inp.onkeydown=e=>{if(e.key.length===1||e.key==='Backspace')SFX.key()};
+  const done=()=>{try{localStorage.setItem('dd-warm','1')}catch(e){}const p=$('wpop');if(p)p.remove();startFlight()};$('skip').onclick=done;
+  const pop=document.createElement('div');pop.id='wpop';pop.className='wpop';pop.setAttribute('role','dialog');pop.setAttribute('aria-modal','true');
+  pop.innerHTML=`<div class="wpopcard"><div class="lbl" style="color:#62c6ee">PRACTICE QUESTION</div>
+    <h2>This one's just a test</h2>
+    <p>It <b>doesn't count</b> towards your score and there's <b>no clock</b>. Have a go to see how the cabins work.</p>
+    <p>Your real flight of 7 questions starts straight after.</p>
+    <button class="key enter" id="wpok">GOT IT, LET'S PRACTISE</button>
+    <button class="bonuslink" id="wpskip">SKIP TO THE REAL FLIGHT ›</button></div>`;
+  document.body.appendChild(pop);
+  $('wpok').onclick=()=>{ac();pop.remove();inp.focus()};$('wpskip').onclick=()=>{pop.remove();done()};$('wpok').focus();
   $('f').onsubmit=e=>{e.preventDefault();const v=inp.value.trim();if(!v)return;const m=match(q,v);
     if(!m||!m.e){$('err').innerHTML=`<div class="caution"><b>⚠ “${esc(v.toUpperCase())}” NOT ON FILE</b>Try another, there's no clock.</div>`;SFX.err();inp.select();return}
     const t=m.capped?3:m.e.tier;SFX.rare(t);$('err').innerHTML='';
