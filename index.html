@@ -109,7 +109,11 @@ canvas{width:100%;height:auto;display:block;image-rendering:pixelated;image-rend
 .log{font-size:11px;line-height:1.75;gap:0}.loghead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}.big.amber{color:#ffb020;font-size:20px;font-weight:700}
 .row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .share{font-family:'B612 Mono',monospace;font-size:12px;white-space:pre-wrap;background:#121b2c;border:1px solid #26354f;border-radius:6px;padding:10px;margin:0;color:#a3b2c8}
-.muted{color:#a3b2c8;font-size:12px}details summary{cursor:pointer;font-size:14px}.ans{display:flex;justify-content:space-between;font-size:13px}.ans.me{color:#ffb020}
+.muted{color:#a3b2c8;font-size:12px}details summary{cursor:pointer;font-size:14px}.ans{display:flex;justify-content:space-between;font-size:13px}
+.tlcount{font-size:10px;color:#8193ad;letter-spacing:.06em;margin:2px 0 4px}
+.tlscroll{max-height:190px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-right:6px}
+.tlscroll .ans{padding:3px 0;border-bottom:1px solid #1c2840}.tlscroll.more{-webkit-mask-image:linear-gradient(#000 85%,transparent);mask-image:linear-gradient(#000 85%,transparent)}
+.tlscroll::-webkit-scrollbar{width:4px}.tlscroll::-webkit-scrollbar-thumb{background:#34465f;border-radius:2px}.ans.me{color:#ffb020}
 footer{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#8193ad;padding:4px 4px 0}
 footer button{background:none;border:1px solid #26354f;border-radius:3px;font-family:inherit;font-size:11px;padding:5px 8px;cursor:pointer}
 .caution.close{border-color:#4fd1ff;color:#bfe9ff}.caution.close b{color:#4fd1ff}
@@ -563,7 +567,7 @@ async function fetchBoard(day){try{await (window.ddRec||Promise.resolve());
   const r=await fetch(DB.url+'rpc/day_board',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_day:day,p_player:playerId()})});
   if(!r.ok)return null;return await r.json()}catch(e){return null}}
 // Update check: if a newer version is published, reload while the player is on the home screen.
-const BUILD='1795441783';
+const BUILD='1795444426';
 async function checkUpdate(){try{if(!/^https?:/.test(location.protocol)||/claude/.test(location.host))return;
   const t=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text());
   const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&typeof view!=='undefined'&&view==='home')location.reload()}catch(e){}}
@@ -807,8 +811,10 @@ function flyUp(r,seg){const pts=PTS[r.tier],h=$('hdr');
     const tick=()=>{const k=Math.min(1,(performance.now()-t0)/500);setScore(Math.round(from+(to-from)*k));if(k<1&&!revealDone)requestAnimationFrame(tick);else if(!revealDone)done()};tick()},880))}
 function finish(){st.phase='end';const p=score();window.ddRec=recordFlight(PRACTICE?'bonus':'daily',DAY,p,st.res,Q,st.miss||[]);if(PRACTICE){st.newUn=[];wipe(end);return}const nu=LIVERIES.filter(L=>!HANG.un.includes(L.id)&&L.test(st.res,p));nu.forEach(L=>HANG.un.push(L.id));saveHang();st.newUn=nu.map(L=>L.id);save();
   STATS.days[DAY]={score:p,rank:rankOf(p)};saveStats();wipe(end)}
-function tierList(q,r,k){const xs=q.list.filter(e=>e.tier===k);const mine=xs.find(e=>e.name===r.name);const show=[...(mine?[mine]:[]),...xs.filter(e=>e!==mine).slice(0,mine?5:6)];
-  return show.map(e=>`<div class="ans ${r.name===e.name?'me':''}"><span>${esc(e.name)}</span><span style="color:${TIER_COL[k]}">${r.name===e.name?'YOU':''}</span></div>`).join('')+(xs.length>show.length?`<div class="muted mono" style="font-size:11px">+${xs.length-show.length} MORE</div>`:'')+(xs.length?'':'<div class="muted">None on file.</div>')}
+function tierList(q,r,k){const xs=q.list.filter(e=>e.tier===k);const mine=xs.find(e=>e.name===r.name);
+  const rest=xs.filter(e=>e!==mine).sort((a,b)=>a.name.localeCompare(b.name,'en',{sensitivity:'base'}));const show=[...(mine?[mine]:[]),...rest];
+  if(!xs.length)return '<div class="muted">None on file.</div>';
+  return `<div class="tlcount mono">${xs.length} ANSWER${xs.length===1?'':'S'}${xs.length>7?' · SCROLL FOR ALL':''}</div><div class="tlscroll${xs.length>7?' more':''}">`+show.map(e=>`<div class="ans ${r.name===e.name?'me':''}"><span>${esc(e.name)}</span><span style="color:${TIER_COL[k]}">${r.name===e.name?'YOU':''}</span></div>`).join('')+'</div>'}
 async function loadBoard(){const el=$('lb');if(!el)return;const day=DAY;const b=await fetchBoard(day);const box=$('lb');if(!box||view!=='end'||DAY!==day)return;
   if(!b||!b.top){box.remove();return}
   const me=b.me,rows=b.top.map(r=>`<div class="lbrow${r.me?' me':''}"><span class="lbrank">${r.rank}</span><span class="lbname">${esc(r.name)}${r.me?' <small>YOU</small>':''}</span><span class="lbtiers">${(r.tiers||[]).map(t=>`<i style="background:${t?TIER_COL[t]:'#26354f'}"></i>`).join('')}</span><span class="lbscore">${r.score}</span></div>`).join('');
