@@ -1,5 +1,5 @@
 {
- "_about": "Approved answers. Every night at 22:00 UK a GitHub job sends this list to the database, which raises the score of anyone who typed one of these inputs on that question. It only ever raises scores, so re-running is safe. Add new approvals to the end.",
+ "_about": "Approved answers. Every night at 22:00 UK, and whenever this file changes, a GitHub job sends this list to the database, which raises the score of anyone who typed one of these inputs on that question. It only ever raises scores, so re-running is safe. Add new approvals to the end.",
  "feedback_done": [],
  "items": [
   {
