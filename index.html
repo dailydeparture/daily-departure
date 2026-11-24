@@ -135,7 +135,7 @@ footer button{background:none;border:1px solid #26354f;border-radius:3px;font-fa
 .fbk{display:flex;gap:8px;align-items:center;font-size:14px;padding:7px 9px;border:1px solid #2a3a56;border-radius:6px;cursor:pointer}.fbk:has(input:checked){border-color:#62c6ee;background:rgba(98,198,238,.1)}
 .fbl{display:block;text-align:left;font-size:12px;color:#a3b2c8;margin:8px 0 3px}.fbcard select,.fbcard input:not([type=radio]),.fbcard textarea{width:100%;box-sizing:border-box;background:#0b1424;color:#e8eef7;border:1px solid #2a3a56;border-radius:6px;padding:8px;font:inherit;font-size:16px}
 .fbcard textarea{resize:vertical}.fbnote{text-align:left;font-size:11px;color:#8193ad;margin:8px 0 4px}
-.key.big.go{min-height:68px;background:#3ddc84;border-color:#3ddc84;color:#06140c;justify-content:center;box-shadow:0 0 18px rgba(61,220,132,.35)}.key.big.go .bar{display:none}.key.big.go .kl{font-size:19px;letter-spacing:.06em;white-space:nowrap;color:#06140c;font-weight:800}.key.big.go .chev{color:#06140c;margin-left:10px}
+.key.big.go{min-height:68px;background:#3ddc84;border-color:#3ddc84;color:#06140c;justify-content:center;box-shadow:0 0 18px rgba(61,220,132,.35)}.key.big.go .bar{display:none}.key.big.go .kl{font-size:19px;letter-spacing:.06em;white-space:nowrap;color:#06140c;font-weight:800}.key.big.go .chev{color:#06140c;margin-left:10px}.key.big.go .kl{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;text-align:center}.key.big.go small{color:#0d4a2a;font-size:11px;font-weight:700;margin-top:2px}
 .wpop{position:fixed;inset:0;z-index:50;background:rgba(6,10,20,.82);display:flex;align-items:center;justify-content:center;padding:20px}
 .wpopcard{background:#121e33;border:2px solid #62c6ee;border-radius:10px;max-width:360px;width:100%;padding:18px 18px 12px;text-align:center}
 .wpopcard h2{margin:6px 0 10px;font-size:20px}.wpopcard p{margin:0 0 10px;font-size:15px;line-height:1.45}.wpopcard .key{width:100%;margin-top:6px}
@@ -576,7 +576,7 @@ async function fetchBoard(day){try{await (window.ddRec||Promise.resolve());
   const r=await fetch(DB.url+'rpc/day_board',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_day:day,p_player:playerId()})});
   if(!r.ok)return null;return await r.json()}catch(e){return null}}
 // Update check: if a newer version is published, reload while the player is on the home screen.
-const BUILD='1795543649';
+const BUILD='1795543828';
 async function checkUpdate(){try{if(!/^https?:/.test(location.protocol)||/claude/.test(location.host))return;
   const t=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text());
   const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&typeof view!=='undefined'&&view==='home')location.reload()}catch(e){}}
