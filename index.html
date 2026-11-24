@@ -128,6 +128,14 @@ footer button{background:none;border:1px solid #26354f;border-radius:3px;font-fa
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.chips span{font-family:'B612 Mono',monospace;font-size:12px;font-weight:700;color:#0c1320;border-radius:4px;padding:4px 7px}
 .plane{width:100%;height:auto;display:block}
 .plane .pax{opacity:0;animation:fillin .25s forwards}
+.beta{border:1px solid #ffb020;background:rgba(255,176,32,.08);border-radius:8px;padding:8px 10px;margin:0 0 10px;font-size:13px;line-height:1.4;display:flex;flex-direction:column;gap:3px}
+.beta b{color:#ffb020;font-size:11px;letter-spacing:.08em}.betalink,.flagq{background:none;border:0;padding:0;color:#62c6ee;font:inherit;font-size:13px;text-align:left;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.flagq{margin:0 0 8px;font-size:12px}.fbkey{width:100%;margin-top:8px;font-size:12px}
+.fbcard{text-align:left;max-height:90vh;overflow-y:auto}.fbcard h2{text-align:left}.fbkinds{display:grid;gap:6px;margin:6px 0 10px}
+.fbk{display:flex;gap:8px;align-items:center;font-size:14px;padding:7px 9px;border:1px solid #2a3a56;border-radius:6px;cursor:pointer}.fbk:has(input:checked){border-color:#62c6ee;background:rgba(98,198,238,.1)}
+.fbl{display:block;text-align:left;font-size:12px;color:#a3b2c8;margin:8px 0 3px}.fbcard select,.fbcard input:not([type=radio]),.fbcard textarea{width:100%;box-sizing:border-box;background:#0b1424;color:#e8eef7;border:1px solid #2a3a56;border-radius:6px;padding:8px;font:inherit;font-size:16px}
+.fbcard textarea{resize:vertical}.fbnote{text-align:left;font-size:11px;color:#8193ad;margin:8px 0 4px}
+.key.big.go{min-height:68px;background:#3ddc84;border-color:#3ddc84;color:#06140c;justify-content:center;box-shadow:0 0 18px rgba(61,220,132,.35)}.key.big.go .bar{display:none}.key.big.go .kl{font-size:19px;letter-spacing:.06em;white-space:nowrap;color:#06140c;font-weight:800}.key.big.go .chev{color:#06140c;margin-left:10px}
 .wpop{position:fixed;inset:0;z-index:50;background:rgba(6,10,20,.82);display:flex;align-items:center;justify-content:center;padding:20px}
 .wpopcard{background:#121e33;border:2px solid #62c6ee;border-radius:10px;max-width:360px;width:100%;padding:18px 18px 12px;text-align:center}
 .wpopcard h2{margin:6px 0 10px;font-size:20px}.wpopcard p{margin:0 0 10px;font-size:15px;line-height:1.45}.wpopcard .key{width:100%;margin-top:6px}
@@ -568,7 +576,7 @@ async function fetchBoard(day){try{await (window.ddRec||Promise.resolve());
   const r=await fetch(DB.url+'rpc/day_board',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_day:day,p_player:playerId()})});
   if(!r.ok)return null;return await r.json()}catch(e){return null}}
 // Update check: if a newer version is published, reload while the player is on the home screen.
-const BUILD='1795542897';
+const BUILD='1795543649';
 async function checkUpdate(){try{if(!/^https?:/.test(location.protocol)||/claude/.test(location.host))return;
   const t=await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text());
   const m=t.match(/const BUILD='(\d+)'/);if(m&&m[1]!==BUILD&&typeof view!=='undefined'&&view==='home')location.reload()}catch(e){}}
@@ -578,6 +586,8 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 async function dbSetName(day,name){try{await (window.ddRec||Promise.resolve());const pid=playerId();if(!pid)return 0;
   const r=await fetch(DB.url+'rpc/set_name',{method:'POST',headers:{apikey:DB.key,'Content-Type':'application/json'},body:JSON.stringify({p_player:pid,p_day:day,p_name:name})});
   return r.ok?await r.json():0}catch(e){return 0}}
+
+async function sendFeedback(f){await dbPost('feedback',[{player_id:playerId(),display_name:(getName()||null),day:DAY,q_id:f.q_id,prompt:f.prompt?f.prompt.slice(0,120):null,kind:f.kind,answer:f.answer?f.answer.slice(0,80):null,message:f.message?f.message.slice(0,600):null,ref:REF,test:!!TEST}])}
 
 // ================= game data =================
 const TIER_COL=['#8193ad','#a3b2c8','#4fd1ff','#3ddc84','#ffb020','#ff4fd8'];
@@ -675,8 +685,9 @@ function bindName(){const ed=$('nmed');if(ed)ed.onclick=()=>{const old=getName()
 function home(){view='home';$('fl').textContent=`KS${100+DAY} JFK › LHR · A321LR`;clearInterval(timer);clearReveal();setScene(5,0,false,null,true);tag('FLIGHT '+(100+DAY)+' · BOARDING NOW');hdr(new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}).toUpperCase(),'green');stripUI();
   const sk=streak(),br=bestRank(),done=st.phase==='end';
   panel.innerHTML=`<p class="tagline">The daily aviation quiz where <span style="color:#ff4fd8">rare answers get you upgraded.</span></p>
+  <div class="beta" role="note"><b class="mono">✈ TEST FLIGHT</b><span>We're still testing, so some answers may be missing or in the wrong cabin, and scores may be corrected.</span><button type="button" id="fbh" class="betalink">Spotted something? Give feedback ›</button></div>
   ${nameHTML()}
-  <button class="key big go" id="go"><span class="bar g"></span><span class="kl">${done?'VIEW TODAY\'S RESULTS':'PLAY TODAY\'S FLIGHT'}<small>${done?'SEE WHERE YOU SAT':'7 QUESTIONS · CLOCK STARTS ON QUESTION 1'}</small></span><span class="chev">›</span></button>
+  <button class="key big go" id="go"><span class="bar g"></span><span class="kl">${done?'VIEW TODAY\'S RESULTS':'PLAY TODAY\'S FLIGHT'}</span><span class="chev">›</span></button>
   <div class="card"><div class="lbl">HOW TO PLAY</div>
    <ol class="howto">
     <li><b>7 questions,</b> one at each stage of the flight, from check-in to arrival.</li>
@@ -693,7 +704,7 @@ function home(){view='home';$('fl').textContent=`KS${100+DAY} JFK › LHR · A32
   ${TEST?`<div class="test"><span class="lbl">TEST MODE · FLIGHT ${100+DAY}${DAY===todayNum()?' (TODAY)':''}</span><div class="row"><button class="key sm" id="dp">◀ PREV</button><button class="key sm" id="dr">RANDOM</button><button class="key sm" id="dt">TODAY</button><button class="key sm" id="dn">NEXT ▶</button></div></div>`:''}`;
   const go=d=>{setDay(d);load();wipe(home)};
   if(TEST){$('dp').onclick=()=>go(DAY-1);$('dn').onclick=()=>go(DAY+1);$('dr').onclick=()=>go(1+Math.floor(Math.random()*365));$('dt').onclick=()=>go(todayNum())}
-  $('hdr').onclick=testTap;bindName();
+  $('hdr').onclick=testTap;bindName();$('fbh').onclick=()=>openFeedback({});betaPop();
   $('go').onclick=()=>{ac();SFX.board();const next=firstTime()?warmup:startFlight;wipe(done?end:(needName()?()=>askName(next):next))};if($('bf'))$('bf').onclick=startBonus;$('hg').onclick=()=>{ac();const bx=$('hgbox');if(bx.innerHTML){bx.innerHTML='';return}bx.innerHTML=hangarHTML();bindHangar();bx.scrollIntoView({behavior:'smooth',block:'start'})}}
 function hangarHTML(){return `<div class="lbl" style="margin-top:12px">HANGAR · ${HANG.un.length} OF ${LIVERIES.length} LIVERIES</div><div class="hangar">${LIVERIES.map(L=>{const un=HANG.un.includes(L.id),on=HANG.eq===L.id;
   return `<button class="liv ${on?'on':''} ${un?'':'lock'}" data-id="${L.id}" ${un?'':'aria-label="Locked livery, tap to see how to unlock"'}><span class="sw" style="background:linear-gradient(90deg,${L.tail} 32%,${L.body||'#f1f3f7'} 32%);border-bottom-color:${L.acc}"></span>${un?L.name.split(' ')[0].toUpperCase()+(on?' ✓':''):'LOCKED'}<small>${un?'':esc(L.how)}</small></button>`}).join('')}</div>`}
@@ -853,13 +864,15 @@ function end(){view='end';clearReveal();setScene(6,st.res[6]?st.res[6].tier:0,fa
    ${STAGES.map((s,i)=>{const r=st.res[i];return `<div style="display:flex;justify-content:space-between;gap:8px"><span><span style="color:#62c6ee">${s.name}</span> · ${r.name?esc(r.name):'timed out'}</span><span style="color:${r.tier?TIER_COL[r.tier]:'#8193ad'};white-space:nowrap">${r.tier?TIER_NAME[r.tier]:'NO SEAT'}</span></div>`}).join('')}</div>
   <div class="row3 two"><button class="key" id="cp"><span class="bar c"></span>SHARE</button><button class="key" id="rv2"><span class="bar"></span>ANSWERS</button></div>
   <p id="cpm" class="mono hintline"></p><pre id="sh" class="share">${esc(share)}</pre>
+  <button class="key fbkey" id="fbe"><span class="bar"></span>FEEDBACK · SUGGEST A QUESTION · CHALLENGE AN ANSWER</button>
   <div id="answers" style="display:none">${Q.map((q,i)=>{const r=st.res[i];const top=[...q.list].sort((x,y)=>y.tier-x.tier).slice(0,8);
-    return `<details class="card"><summary>Q${i+1} ${esc(q.prompt)} <span style="color:${TIER_COL[r.tier]}">· ${r.name?esc(r.name):'timed out'}</span></summary><p class="muted">${q.list.length} answers on file. Tap a cabin to see what lands there.</p><div class="tabs" data-q="${i}">${[1,2,3,4,5].map(k=>`<button type="button" class="tab${k===(r.tier||1)?' on':''}" data-k="${k}" style="--c:${TIER_COL[k]}">${TIER_SHORT[k]}</button>`).join('')}</div><div class="tablist" id="tl${i}">${tierList(q,r,r.tier||1)}</div></details>`}).join('')}
+    return `<details class="card"><summary>Q${i+1} ${esc(q.prompt)} <span style="color:${TIER_COL[r.tier]}">· ${r.name?esc(r.name):'timed out'}</span></summary><p class="muted">${q.list.length} answers on file. Tap a cabin to see what lands there.</p><button type="button" class="flagq" data-fq="${i}">Think an answer should count, or is in the wrong cabin? Tell us ›</button><div class="tabs" data-q="${i}">${[1,2,3,4,5].map(k=>`<button type="button" class="tab${k===(r.tier||1)?' on':''}" data-k="${k}" style="--c:${TIER_COL[k]}">${TIER_SHORT[k]}</button>`).join('')}</div><div class="tablist" id="tl${i}">${tierList(q,r,r.tier||1)}</div></details>`}).join('')}
    ${TEST?'<button class="key sm" id="rp" style="margin-top:8px">REPLAY THIS FLIGHT (TEST)</button>':''}</div>`;
   if(nu.length){SFX.unlock(0.3);st.newUn=[];save()}
   $('cp').onclick=async()=>{try{if(navigator.share){await navigator.share({text:window.ddShare});$('cpm').textContent='SHARED';return}}catch(e){if(e&&e.name==='AbortError')return}try{await navigator.clipboard.writeText(window.ddShare);$('cpm').textContent='COPIED TO CLIPBOARD'}catch(e){const rg=document.createRange();rg.selectNodeContents($('sh'));const sl=getSelection();sl.removeAllRanges();sl.addRange(rg);$('cpm').textContent='SELECTED. COPY IT FROM BELOW'}};
   if($('nf'))$('nf').onclick=()=>startBonus();if(!PRACTICE)loadBoard();
   document.querySelectorAll('.tabs').forEach(t=>t.onclick=ev=>{const b=ev.target.closest('.tab');if(!b)return;const i=+t.dataset.q;t.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));$('tl'+i).innerHTML=tierList(Q[i],st.res[i],+b.dataset.k)});
+  $('fbe').onclick=()=>openFeedback({});document.querySelectorAll('.flagq').forEach(b=>b.onclick=()=>{const i=+b.dataset.fq,r=st.res[i]||{};openFeedback({qi:i,kind:'should_count',answer:r.input||r.name||''})});
   $('rv2').onclick=()=>{const a=$('answers');a.style.display=a.style.display==='none'?'block':'none'};
   if($('rp'))$('rp').onclick=()=>{if(!PRACTICE)try{localStorage.removeItem(key())}catch(e){}startFlight()}}
 
@@ -873,6 +886,44 @@ function livPop(id){const L=livById(id);SFX.whoosh();const o=document.createElem
  o.innerHTML=`<div class="popc mono"><div class="lbl">LOCKED LIVERY</div><div class="popsw" style="background:linear-gradient(90deg,${L.tail} 32%,${L.body||'#f1f3f7'} 32%);border-bottom-color:${L.acc}"></div><div class="popn">${esc(L.name.toUpperCase())}</div><div class="poph"><span>UNLOCK WHEN YOU</span><b>${esc(L.how.toUpperCase())}</b></div><button class="key sm" id="popx">CLOSE</button></div>`;
  document.body.appendChild(o);const close=()=>{o.remove();document.removeEventListener('keydown',k)};const k=e=>{if(e.key==='Escape'||e.key==='Enter'){e.preventDefault();e.stopImmediatePropagation();close()}};
  document.addEventListener('keydown',k,true);o.onclick=e=>{if(e.target===o)close()};o.querySelector('#popx').onclick=close}
+
+// ---- Test-flight notice (shown once to everyone, played or not) ----
+function betaPop(){try{if(localStorage.getItem('dd-beta1'))return}catch(e){return}
+  const p=document.createElement('div');p.className='wpop';p.id='bpop';p.setAttribute('role','dialog');p.setAttribute('aria-modal','true');
+  p.innerHTML=`<div class="wpopcard"><div class="lbl" style="color:#ffb020">✈ TEST FLIGHT</div><h2>Thanks for flying with us early</h2>
+   <p>Daily Departure is still being tested. Some answers may be <b>missing</b> or in the <b>wrong cabin</b>, and we may correct scores as we fix them.</p>
+   <p>If something looks off, or you've got a question idea, tap <b>Feedback</b>. It really helps.</p>
+   <button class="key enter" id="bpok">UNDERSTOOD</button></div>`;
+  document.body.appendChild(p);$('bpok').onclick=()=>{try{localStorage.setItem('dd-beta1','1')}catch(e){}p.remove()};$('bpok').focus()}
+// ---- Feedback ----
+const FB_KINDS=[['should_count','My answer should count'],['wrong_cabin','An answer is in the wrong cabin'],['suggest','Suggest a question'],['other','Something else']];
+function openFeedback(o){const old=$('fbpop');if(old)old.remove();
+  const qs=(typeof Q!=='undefined'&&Q&&Q.length)?Q:[];const k0=o.kind||'should_count';
+  const p=document.createElement('div');p.className='wpop';p.id='fbpop';p.setAttribute('role','dialog');p.setAttribute('aria-modal','true');
+  p.innerHTML=`<form class="wpopcard fbcard" id="fbf" autocomplete="off"><div class="lbl" style="color:#62c6ee">FEEDBACK</div><h2>Tell us what you think</h2>
+   <div class="fbkinds">${FB_KINDS.map(([v,l])=>`<label class="fbk"><input type="radio" name="fbk" value="${v}"${v===k0?' checked':''}><span>${l}</span></label>`).join('')}</div>
+   <div id="fbqwrap"><label class="fbl">Which question?</label><select id="fbq">${qs.map((q,i)=>`<option value="${i}"${i===o.qi?' selected':''}>Q${i+1} · ${esc(q.prompt)}</option>`).join('')}<option value="">Not about a particular question</option></select>
+    <label class="fbl" id="fbal">Your answer</label><input id="fba" maxlength="80" value="${esc(o.answer||'')}" placeholder="What you typed or meant"></div>
+   <label class="fbl" id="fbml">Anything else?</label><textarea id="fbm" maxlength="600" rows="4" placeholder="Optional"></textarea>
+   <p class="fbnote">Sent with your display name${getName()?' ('+esc(getName())+')':''}. Please don't include personal details.</p>
+   <div id="fberr" class="nmerr" aria-live="polite"></div>
+   <button class="key enter" id="fbsend">SEND FEEDBACK</button><button type="button" class="bonuslink" id="fbx">CANCEL</button></form>`;
+  document.body.appendChild(p);
+  const upd=()=>{const k=document.querySelector('input[name=fbk]:checked').value;const sug=k==='suggest',oth=k==='other';
+    $('fbqwrap').style.display=sug?'none':'block';$('fbal').textContent=k==='wrong_cabin'?'Which answer?':'Your answer';
+    $('fbml').textContent=sug?'Your question idea (and some answers if you like)':oth?'Your feedback':'Why? (optional)';
+    $('fbm').placeholder=sug?'e.g. Name an airline lounge. Galleries, Clubhouse, Centurion…':oth?'':'e.g. It flies from Gatwick';
+    if(qs.length&&!sug&&o.qi===undefined&&!oth&&$('fbq').value==='')$('fbq').value='0'};
+  p.querySelectorAll('input[name=fbk]').forEach(r=>r.onchange=upd);upd();
+  $('fbx').onclick=()=>p.remove();
+  $('fbf').onsubmit=async e=>{e.preventDefault();const k=document.querySelector('input[name=fbk]:checked').value;
+    const qi=$('fbqwrap').style.display==='none'?'':$('fbq').value;const q=qi===''?null:qs[+qi];
+    const ans=$('fbqwrap').style.display==='none'?'':$('fba').value.trim();const msg=$('fbm').value.trim();
+    if(!ans&&!msg){$('fberr').textContent=k==='suggest'?'Type your question idea first.':'Add your answer or a short note first.';return}
+    $('fbsend').disabled=true;$('fberr').textContent='Sending…';
+    try{await sendFeedback({kind:k,q_id:q?q.id:null,prompt:q?q.prompt:null,answer:ans||null,message:msg||null});
+      p.querySelector('.fbcard').innerHTML=`<div class="lbl" style="color:#3ddc84">THANK YOU</div><h2>Feedback received</h2><p>We read every message. If we add an answer you typed today, we'll correct your score.</p><button class="key enter" id="fbok">BACK TO THE GAME</button>`;$('fbok').onclick=()=>p.remove()}
+    catch(err){$('fbsend').disabled=false;$('fberr').textContent="Couldn't send just now. Check your connection and try again."}}}
 
 
 </script>
