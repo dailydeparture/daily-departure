@@ -1,0 +1,268 @@
+{
+ "_about": "Approved answers. Every night at 22:00 UK a GitHub job sends this list to the database, which raises the score of anyone who typed one of these inputs on that question. It only ever raises scores, so re-running is safe. Add new approvals to the end.",
+ "feedback_done": [],
+ "items": [
+  {
+   "q": "A02",
+   "name": "Turbine",
+   "tier": 3,
+   "inputs": [
+    "turbine"
+   ]
+  },
+  {
+   "q": "A02",
+   "name": "Trim wheel",
+   "tier": 3,
+   "inputs": [
+    "trim",
+    "trim wheel"
+   ]
+  },
+  {
+   "q": "A02",
+   "name": "Main gear",
+   "tier": 3,
+   "inputs": [
+    "bogey"
+   ]
+  },
+  {
+   "q": "A04",
+   "name": "Mitsubishi",
+   "tier": 5,
+   "inputs": [
+    "mitsibushi",
+    "mitsubishi"
+   ]
+  },
+  {
+   "q": "A04",
+   "name": "Pratt & Whitney",
+   "tier": 2,
+   "inputs": [
+    "whitney"
+   ]
+  },
+  {
+   "q": "A04",
+   "name": "Rolls-Royce",
+   "tier": 1,
+   "inputs": [
+    "merlin",
+    "trent"
+   ]
+  },
+  {
+   "q": "B62",
+   "name": "Air New Zealand",
+   "tier": 1,
+   "inputs": [
+    "new zealand air",
+    "new zealand airways"
+   ]
+  },
+  {
+   "q": "B62",
+   "name": "Qantas",
+   "tier": 1,
+   "inputs": [
+    "kangeroo air"
+   ]
+  },
+  {
+   "q": "B62",
+   "name": "Air Queensland",
+   "tier": 5,
+   "inputs": [
+    "queenslandair"
+   ]
+  },
+  {
+   "q": "B62",
+   "name": "Air Australia",
+   "tier": 4,
+   "inputs": [
+    "air aus",
+    "air australia",
+    "australia air"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Deviate",
+   "tier": 4,
+   "inputs": [
+    "deviate for weather"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Pan-Pan",
+   "tier": 2,
+   "inputs": [
+    "pan pan pan",
+    "panpanpan"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Callsign",
+   "tier": 2,
+   "inputs": [
+    "speedbird"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Copy",
+   "tier": 2,
+   "inputs": [
+    "copied"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Follow the greens",
+   "tier": 5,
+   "inputs": [
+    "follow the greens"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Good morning",
+   "tier": 3,
+   "inputs": [
+    "morning"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Toothpaste",
+   "tier": 3,
+   "inputs": [
+    "tooth paste",
+    "toothpaste"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Face wipes",
+   "tier": 4,
+   "inputs": [
+    "face wipe"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Meal",
+   "tier": 1,
+   "inputs": [
+    "catering"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Napkin",
+   "tier": 2,
+   "inputs": [
+    "napkin"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Coaster",
+   "tier": 3,
+   "inputs": [
+    "coaster"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Pen",
+   "tier": 3,
+   "inputs": [
+    "pen"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Playing cards",
+   "tier": 3,
+   "inputs": [
+    "cards"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Face mist",
+   "tier": 4,
+   "inputs": [
+    "eye mist",
+    "soray",
+    "spray"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Drinks",
+   "tier": 1,
+   "inputs": [
+    "gin"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Toilet",
+   "tier": 2,
+   "inputs": [
+    "toilet"
+   ]
+  },
+  {
+   "q": "F117",
+   "name": "Miracle on the Hudson",
+   "tier": 1,
+   "inputs": [
+    "hudson river",
+    "hudson river crash"
+   ]
+  },
+  {
+   "q": "F117",
+   "name": "Northwest Flight 85",
+   "tier": 5,
+   "inputs": [
+    "northwest 85"
+   ]
+  },
+  {
+   "q": "F117",
+   "name": "BA38 (Heathrow crash landing)",
+   "tier": 2,
+   "inputs": [
+    "777 lhr",
+    "ba 777",
+    "ba mmm",
+    "heathrow 777"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Phonetic alphabet",
+   "tier": 2,
+   "inputs": [
+    "alpha"
+   ]
+  },
+  {
+   "q": "G141",
+   "name": "Lululemon",
+   "tier": 3,
+   "inputs": [
+    "lululemon"
+   ]
+  }
+ ]
+}

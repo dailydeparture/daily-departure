@@ -1,0 +1,23 @@
+name: Nightly score corrections
+on:
+  schedule:
+    - cron: '0 22 * * *'   # 22:00 UTC (10pm UK in winter, 11pm in summer)
+  workflow_dispatch: {}
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Send approved answers to the database
+        env:
+          DD_ADMIN_TOKEN: ${{ secrets.DD_ADMIN_TOKEN }}
+        run: |
+          if [ -z "$DD_ADMIN_TOKEN" ]; then echo "DD_ADMIN_TOKEN secret is not set"; exit 1; fi
+          body=$(jq -c --arg t "$DD_ADMIN_TOKEN" '{p_token:$t, p_items:.items, p_feedback_done:.feedback_done}' corrections.json)
+          code=$(curl -s -o out.json -w "%{http_code}" -X POST \
+            "https://ictoubtwghtmpstavhxe.supabase.co/rest/v1/rpc/apply_corrections" \
+            -H "apikey: sb_publishable_4lhYtPqJD4S09_UH-VGVpw_8nLAJwwH" \
+            -H "Content-Type: application/json" \
+            --data "$body")
+          cat out.json; echo
+          test "$code" = "200"
