@@ -263,6 +263,49 @@
    "inputs": [
     "lululemon"
    ]
+  },
+  {
+   "q": "A02",
+   "name": "Thrust reverser",
+   "tier": 3,
+   "inputs": [
+    "reverse thruster",
+    "reverse thrusters"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Altitude",
+   "tier": 2,
+   "inputs": [
+    "altitude"
+   ]
+  },
+  {
+   "q": "D29",
+   "name": "Squawk",
+   "tier": 2,
+   "inputs": [
+    "sqwuak"
+   ]
+  },
+  {
+   "q": "F117",
+   "name": "BA9 (Jakarta incident)",
+   "tier": 3,
+   "inputs": [
+    "ba 747 lhr to new zealand bolcano cloud"
+   ]
+  },
+  {
+   "q": "E34",
+   "name": "Face mist",
+   "tier": 4,
+   "inputs": [
+    "face mist",
+    "facial mist",
+    "face spray"
+   ]
   }
  ]
 }
