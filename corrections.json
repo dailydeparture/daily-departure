@@ -306,6 +306,62 @@
     "facial mist",
     "face spray"
    ]
+  },
+  {
+   "q": "E119",
+   "name": "Fixed electrical ground power",
+   "tier": 3,
+   "inputs": [
+    "plug in ground power"
+   ]
+  },
+  {
+   "q": "E119",
+   "name": "Electric baggage tractors",
+   "tier": 3,
+   "inputs": [
+    "electric baggage tugs"
+   ]
+  },
+  {
+   "q": "E119",
+   "name": "Single-engine taxi",
+   "tier": 3,
+   "inputs": [
+    "single engine taxiing"
+   ]
+  },
+  {
+   "q": "E119",
+   "name": "Offsetting",
+   "tier": 3,
+   "inputs": [
+    "carbon offsetting"
+   ]
+  },
+  {
+   "q": "E119",
+   "name": "HVO fuel",
+   "tier": 4,
+   "inputs": [
+    "hydrotreated vegetable oil (hvo) for gse"
+   ]
+  },
+  {
+   "q": "E119",
+   "name": "LED lighting",
+   "tier": 2,
+   "inputs": [
+    "led apron lighting"
+   ]
+  },
+  {
+   "q": "D82",
+   "name": "Fuselage",
+   "tier": 2,
+   "inputs": [
+    "fuselage damage"
+   ]
   }
  ]
 }
