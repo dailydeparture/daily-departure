@@ -362,6 +362,2048 @@
    "inputs": [
     "fuselage damage"
    ]
+  },
+  {
+   "q": "E37",
+   "name": "Cabin crew",
+   "tier": 1,
+   "inputs": [
+    "air steward"
+   ]
+  },
+  {
+   "q": "A54",
+   "name": "Lockheed L-1011 TriStar",
+   "tier": 3,
+   "inputs": [
+    "lockheed tristar"
+   ]
+  },
+  {
+   "q": "G136",
+   "name": "Singapore",
+   "tier": 3,
+   "inputs": [
+    "singapore changi"
+   ]
+  },
+  {
+   "q": "G136",
+   "name": "Paris Charles de Gaulle",
+   "tier": 1,
+   "inputs": [
+    "paris cdg"
+   ]
+  },
+  {
+   "q": "G137",
+   "name": "Doha",
+   "tier": 1,
+   "inputs": [
+    "doha hamad"
+   ]
+  },
+  {
+   "q": "G137",
+   "name": "Madrid",
+   "tier": 1,
+   "inputs": [
+    "madrid barajas"
+   ]
+  },
+  {
+   "q": "C69",
+   "name": "Singapore Changi (SIN)",
+   "tier": 1,
+   "inputs": [
+    "singapore sin"
+   ]
+  },
+  {
+   "q": "C69",
+   "name": "Sydney Kingsford Smith (SYD)",
+   "tier": 1,
+   "inputs": [
+    "sydney syd"
+   ]
+  },
+  {
+   "q": "C69",
+   "name": "London Stansted (STN)",
+   "tier": 2,
+   "inputs": [
+    "stansted stn"
+   ]
+  },
+  {
+   "q": "C69",
+   "name": "Seattle–Tacoma (SEA)",
+   "tier": 2,
+   "inputs": [
+    "seattle sea"
+   ]
+  },
+  {
+   "q": "C69",
+   "name": "London Southend (SEN)",
+   "tier": 4,
+   "inputs": [
+    "southend sen"
+   ]
+  },
+  {
+   "q": "C69",
+   "name": "Comodoro Arturo Merino Benítez (SCL)",
+   "tier": 3,
+   "inputs": [
+    "santiago scl"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Single-engine taxi",
+   "tier": 2,
+   "inputs": [
+    "single engine taxiing"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Fly slower",
+   "tier": 2,
+   "inputs": [
+    "flying slower"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Less weight",
+   "tier": 1,
+   "inputs": [
+    "carrying less weight"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Engine washing",
+   "tier": 4,
+   "inputs": [
+    "washing engines"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Direct routes",
+   "tier": 2,
+   "inputs": [
+    "optimised routes"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Reduced APU use",
+   "tier": 3,
+   "inputs": [
+    "reducing apu use"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Potable water optimisation",
+   "tier": 3,
+   "inputs": [
+    "carrying less water"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Reduced APU use",
+   "tier": 3,
+   "inputs": [
+    "ground power instead of apu"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Electronic flight bags",
+   "tier": 3,
+   "inputs": [
+    "ipads instead of paper manuals"
+   ]
+  },
+  {
+   "q": "E123",
+   "name": "Idle reverse",
+   "tier": 4,
+   "inputs": [
+    "idle reverse thrust"
+   ]
+  },
+  {
+   "q": "H144",
+   "name": "Walt Disney World",
+   "tier": 1,
+   "inputs": [
+    "disney world orlando"
+   ]
+  },
+  {
+   "q": "H144",
+   "name": "Ferrari World",
+   "tier": 3,
+   "inputs": [
+    "ferrari world abu dhabi"
+   ]
+  },
+  {
+   "q": "E99",
+   "name": "Wheelchair",
+   "tier": 1,
+   "inputs": [
+    "wheelchair assistance"
+   ]
+  },
+  {
+   "q": "F45",
+   "name": "Air Crash Investigation",
+   "tier": 2,
+   "inputs": [
+    "air crash investigation",
+    "mayday",
+    "air disasters",
+    "mayday: air disaster",
+    "air crash investigations",
+    "aircrash investigation",
+    "air crash investigators",
+    "air crash investigation mayday"
+   ]
+  },
+  {
+   "q": "F45",
+   "name": "Cast Away",
+   "tier": 3,
+   "inputs": [
+    "cast away",
+    "castaway",
+    "cast-away",
+    "cast away film"
+   ]
+  },
+  {
+   "q": "C72",
+   "name": "Suvarnabhumi (BKK)",
+   "tier": 1,
+   "inputs": [
+    "bangkok suvarnabhumi"
+   ]
+  },
+  {
+   "q": "C72",
+   "name": "Hamad (DOH)",
+   "tier": 1,
+   "inputs": [
+    "doha hamad"
+   ]
+  },
+  {
+   "q": "C72",
+   "name": "Incheon (ICN)",
+   "tier": 2,
+   "inputs": [
+    "seoul incheon"
+   ]
+  },
+  {
+   "q": "A03",
+   "name": "PW4000",
+   "tier": 4,
+   "inputs": [
+    "pratt and whitney pw4000"
+   ]
+  },
+  {
+   "q": "A03",
+   "name": "Rolls-Royce Trent",
+   "tier": 2,
+   "inputs": [
+    "rolls-royce trent 1000"
+   ]
+  },
+  {
+   "q": "G129",
+   "name": "bmi (British Midland)",
+   "tier": 3,
+   "inputs": [
+    "bmi (british midland)",
+    "bmi",
+    "british midland",
+    "british midland international",
+    "bmi british midland",
+    "bmi airline"
+   ]
+  },
+  {
+   "q": "G129",
+   "name": "Loganair franchise",
+   "tier": 5,
+   "inputs": [
+    "loganair"
+   ]
+  },
+  {
+   "q": "D89",
+   "name": "Late inbound aircraft",
+   "tier": 1,
+   "inputs": [
+    "late incoming aircraft"
+   ]
+  },
+  {
+   "q": "D89",
+   "name": "Missing passenger",
+   "tier": 2,
+   "inputs": [
+    "offloading a no-show's bags"
+   ]
+  },
+  {
+   "q": "E41",
+   "name": "Sugar cane",
+   "tier": 2,
+   "inputs": [
+    "sugarcane ethanol"
+   ]
+  },
+  {
+   "q": "E41",
+   "name": "Carbon dioxide",
+   "tier": 3,
+   "inputs": [
+    "captured co2 and green hydrogen"
+   ]
+  },
+  {
+   "q": "E39",
+   "name": "Follow-me car",
+   "tier": 2,
+   "inputs": [
+    "follow me van"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Gatwick lounge",
+   "tier": 3,
+   "inputs": [
+    "gatwick south lounge"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Terminal 3 Galleries",
+   "tier": 3,
+   "inputs": [
+    "heathrow t3"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "New York JFK lounge",
+   "tier": 4,
+   "inputs": [
+    "new york jfk lounge",
+    "jfk terminal 7",
+    "jfk lounge",
+    "jfk t7",
+    "jfk terminal 8",
+    "new york lounge",
+    "jfk"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Galleries Club",
+   "tier": 1,
+   "inputs": [
+    "galleries north"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Galleries Club",
+   "tier": 1,
+   "inputs": [
+    "galleries south"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Gatwick lounge",
+   "tier": 3,
+   "inputs": [
+    "gatwick north lounge"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Galleries Arrivals",
+   "tier": 2,
+   "inputs": [
+    "t5 arrivals lounge"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Chelsea Lounge",
+   "tier": 4,
+   "inputs": [
+    "chelsea lounge jfk"
+   ]
+  },
+  {
+   "q": "G48",
+   "name": "Soho Lounge",
+   "tier": 4,
+   "inputs": [
+    "soho lounge jfk"
+   ]
+  },
+  {
+   "q": "A08",
+   "name": "Dassault Falcon",
+   "tier": 2,
+   "inputs": [
+    "dassault falcon 7x"
+   ]
+  },
+  {
+   "q": "A08",
+   "name": "Embraer Phenom",
+   "tier": 1,
+   "inputs": [
+    "embraer phenom 300"
+   ]
+  },
+  {
+   "q": "E101",
+   "name": "Bread basket",
+   "tier": 4,
+   "inputs": [
+    "bun warmer"
+   ]
+  },
+  {
+   "q": "E36",
+   "name": "Basic Economy",
+   "tier": 2,
+   "inputs": [
+    "basic fare"
+   ]
+  },
+  {
+   "q": "E36",
+   "name": "Z",
+   "tier": 2,
+   "inputs": [
+    "z class"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Security",
+   "tier": 1,
+   "inputs": [
+    "security checks"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Reclining seats",
+   "tier": 2,
+   "inputs": [
+    "seat reclining"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Legroom",
+   "tier": 1,
+   "inputs": [
+    "cramped legs"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Small bag allowance",
+   "tier": 2,
+   "inputs": [
+    "hand luggage limits"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Taking liquids out",
+   "tier": 2,
+   "inputs": [
+    "liquids rules"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Expensive food",
+   "tier": 2,
+   "inputs": [
+    "overpriced food"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Airline food",
+   "tier": 2,
+   "inputs": [
+    "plane food"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Reclining seats",
+   "tier": 2,
+   "inputs": [
+    "seat recliners"
+   ]
+  },
+  {
+   "q": "H150",
+   "name": "Boarding",
+   "tier": 2,
+   "inputs": [
+    "boarding scrum"
+   ]
+  },
+  {
+   "q": "F109",
+   "name": "Eastbourne Airbourne",
+   "tier": 2,
+   "inputs": [
+    "airbourne eastbourne"
+   ]
+  },
+  {
+   "q": "F109",
+   "name": "Duxford",
+   "tier": 2,
+   "inputs": [
+    "duxford flying legends"
+   ]
+  },
+  {
+   "q": "D31",
+   "name": "Gear down",
+   "tier": 1,
+   "inputs": [
+    "gear down",
+    "landing gear down",
+    "gear down three greens",
+    "three greens",
+    "gear is down",
+    "down"
+   ]
+  },
+  {
+   "q": "D31",
+   "name": "Terrain",
+   "tier": 3,
+   "inputs": [
+    "terrain terrain"
+   ]
+  },
+  {
+   "q": "D31",
+   "name": "Windshear",
+   "tier": 3,
+   "inputs": [
+    "windshear windshear windshear"
+   ]
+  },
+  {
+   "q": "E102",
+   "name": "Music",
+   "tier": 1,
+   "inputs": [
+    "audio"
+   ]
+  },
+  {
+   "q": "E102",
+   "name": "TV",
+   "tier": 1,
+   "inputs": [
+    "tv boxsets"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Manchester (MAN)",
+   "tier": 1,
+   "inputs": [
+    "man manchester"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Adolfo Suárez Madrid–Barajas (MAD)",
+   "tier": 1,
+   "inputs": [
+    "mad madrid"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Miami (MIA)",
+   "tier": 1,
+   "inputs": [
+    "mia miami"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Orlando (MCO)",
+   "tier": 2,
+   "inputs": [
+    "mco orlando"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Munich (MUC)",
+   "tier": 2,
+   "inputs": [
+    "muc munich"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Malta (MLA)",
+   "tier": 3,
+   "inputs": [
+    "mla malta"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Menorca (MAH)",
+   "tier": 3,
+   "inputs": [
+    "mah menorca"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Velana (MLE)",
+   "tier": 3,
+   "inputs": [
+    "mle male"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Louis Armstrong New Orleans (MSY)",
+   "tier": 3,
+   "inputs": [
+    "msy new orleans"
+   ]
+  },
+  {
+   "q": "C21",
+   "name": "Teesside (MME)",
+   "tier": 4,
+   "inputs": [
+    "mme teesside"
+   ]
+  },
+  {
+   "q": "G140",
+   "name": "Comic Relief",
+   "tier": 1,
+   "inputs": [
+    "sport relief"
+   ]
+  },
+  {
+   "q": "G140",
+   "name": "BA Better World Community Fund",
+   "tier": 2,
+   "inputs": [
+    "ba community fund"
+   ]
+  },
+  {
+   "q": "G140",
+   "name": "LanzaJet",
+   "tier": 4,
+   "inputs": [
+    "lanzatech"
+   ]
+  },
+  {
+   "q": "G140",
+   "name": "Qatar Airways partnership",
+   "tier": 4,
+   "inputs": [
+    "qatar airways joint business"
+   ]
+  },
+  {
+   "q": "G140",
+   "name": "Change for Good",
+   "tier": 3,
+   "inputs": [
+    "unicef change for good"
+   ]
+  },
+  {
+   "q": "D88",
+   "name": "Disembarking",
+   "tier": 2,
+   "inputs": [
+    "deboarding"
+   ]
+  },
+  {
+   "q": "D88",
+   "name": "Potable water servicing",
+   "tier": 3,
+   "inputs": [
+    "water servicing"
+   ]
+  },
+  {
+   "q": "D88",
+   "name": "Baggage unloading",
+   "tier": 1,
+   "inputs": [
+    "unloading bags"
+   ]
+  },
+  {
+   "q": "H145",
+   "name": "Swimsuit",
+   "tier": 1,
+   "inputs": [
+    "swimmers"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Ignoring crew instructions",
+   "tier": 2,
+   "inputs": [
+    "ignoring crew instructions",
+    "ignoring instructions",
+    "not listening",
+    "not following instructions",
+    "ignoring the crew",
+    "not listening to crew"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Bare feet",
+   "tier": 1,
+   "inputs": [
+    "walking barefoot"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Feet on seats",
+   "tier": 2,
+   "inputs": [
+    "feet on seats",
+    "feet on seat",
+    "feet on the seat",
+    "feet on armrest",
+    "feet up",
+    "feet on the seat in front"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Phones not on flight mode",
+   "tier": 3,
+   "inputs": [
+    "using phone"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Getting drunk",
+   "tier": 2,
+   "inputs": [
+    "drinking own alcohol"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Standing up early",
+   "tier": 1,
+   "inputs": [
+    "standing up early at landing"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Pressing the call bell",
+   "tier": 1,
+   "inputs": [
+    "pressing the call bell for nothing"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Reclining",
+   "tier": 1,
+   "inputs": [
+    "reclining during meals"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Ignoring seatbelt sign",
+   "tier": 2,
+   "inputs": [
+    "standing up when the seatbelt sign is on"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Bare feet",
+   "tier": 1,
+   "inputs": [
+    "bare feet in the toilets"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Wearing headphones when spoken to",
+   "tier": 2,
+   "inputs": [
+    "headphones in when ordering"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Changing nappies on tray tables",
+   "tier": 3,
+   "inputs": [
+    "nappies on the tray table"
+   ]
+  },
+  {
+   "q": "E100",
+   "name": "Hanging around the galley",
+   "tier": 3,
+   "inputs": [
+    "hanging around in the galley"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Charles de Gaulle (CDG)",
+   "tier": 1,
+   "inputs": [
+    "cdg paris charles de gaulle"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Copenhagen Kastrup (CPH)",
+   "tier": 1,
+   "inputs": [
+    "cph copenhagen"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Cape Town (CPT)",
+   "tier": 2,
+   "inputs": [
+    "cpt cape town"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Cancún (CUN)",
+   "tier": 1,
+   "inputs": [
+    "cun cancun"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Cardiff (CWL)",
+   "tier": 2,
+   "inputs": [
+    "cwl cardiff"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Corfu Ioannis Kapodistrias (CFU)",
+   "tier": 2,
+   "inputs": [
+    "cfu corfu"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Catania-Fontanarossa (CTA)",
+   "tier": 3,
+   "inputs": [
+    "cta catania"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Chania (CHQ)",
+   "tier": 3,
+   "inputs": [
+    "chq chania"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Canberra (CBR)",
+   "tier": 3,
+   "inputs": [
+    "cbr canberra"
+   ]
+  },
+  {
+   "q": "C70",
+   "name": "Mohammed V (CMN)",
+   "tier": 3,
+   "inputs": [
+    "cmn casablanca"
+   ]
+  },
+  {
+   "q": "D87",
+   "name": "Cabin crew seats for landing",
+   "tier": 2,
+   "inputs": [
+    "cabin crew take your seats for landing"
+   ]
+  },
+  {
+   "q": "D87",
+   "name": "Doors to automatic and cross-check",
+   "tier": 2,
+   "inputs": [
+    "cabin crew doors to automatic and cross check"
+   ]
+  },
+  {
+   "q": "D87",
+   "name": "Seats upright",
+   "tier": 2,
+   "inputs": [
+    "seats upright, tables stowed"
+   ]
+  },
+  {
+   "q": "E96",
+   "name": "Alcohol",
+   "tier": 1,
+   "inputs": [
+    "baileys"
+   ]
+  },
+  {
+   "q": "E96",
+   "name": "Perfume",
+   "tier": 1,
+   "inputs": [
+    "chanel"
+   ]
+  },
+  {
+   "q": "E96",
+   "name": "Jewellery",
+   "tier": 2,
+   "inputs": [
+    "swarovski jewellery"
+   ]
+  },
+  {
+   "q": "C22",
+   "name": "Josep Tarradellas Barcelona-El Prat (BCN)",
+   "tier": 1,
+   "inputs": [
+    "barcelona bcn"
+   ]
+  },
+  {
+   "q": "C22",
+   "name": "Budapest Liszt Ferenc (BUD)",
+   "tier": 3,
+   "inputs": [
+    "budapest bud"
+   ]
+  },
+  {
+   "q": "F114",
+   "name": "Hamilton Khaki Pilot",
+   "tier": 4,
+   "inputs": [
+    "hamilton khaki aviation"
+   ]
+  },
+  {
+   "q": "F114",
+   "name": "Alpha Industries",
+   "tier": 3,
+   "inputs": [
+    "alpha industries ma-1"
+   ]
+  },
+  {
+   "q": "F114",
+   "name": "Irvin jacket",
+   "tier": 4,
+   "inputs": [
+    "sheepskin flying jacket"
+   ]
+  },
+  {
+   "q": "F114",
+   "name": "Bomber jacket",
+   "tier": 1,
+   "inputs": [
+    "ma-1 jacket"
+   ]
+  },
+  {
+   "q": "F114",
+   "name": "Irvin jacket",
+   "tier": 4,
+   "inputs": [
+    "irvin sheepskin jacket"
+   ]
+  },
+  {
+   "q": "F114",
+   "name": "Cartier Santos",
+   "tier": 4,
+   "inputs": [
+    "cartier santos",
+    "santos",
+    "cartier",
+    "santos de cartier",
+    "cartier santos-dumont",
+    "santos-dumont watch",
+    "cartier santos watch"
+   ]
+  },
+  {
+   "q": "G130",
+   "name": "Executive Club",
+   "tier": 2,
+   "inputs": [
+    "executive club",
+    "ba executive club",
+    "exec club",
+    "baec",
+    "british airways executive club",
+    "executive club card"
+   ]
+  },
+  {
+   "q": "E92",
+   "name": "Rubbish",
+   "tier": 2,
+   "inputs": [
+    "sweet wrappers"
+   ]
+  },
+  {
+   "q": "E92",
+   "name": "Kids pack",
+   "tier": 4,
+   "inputs": [
+    "kids activity pack"
+   ]
+  },
+  {
+   "q": "G134",
+   "name": "Royal Brunei Airlines",
+   "tier": 4,
+   "inputs": [
+    "royal brunei airlines",
+    "royal brunei",
+    "rba",
+    "brunei airlines",
+    "royal brunei air"
+   ]
+  },
+  {
+   "q": "E38",
+   "name": "Centurion Lounge",
+   "tier": 3,
+   "inputs": [
+    "amex centurion lounge"
+   ]
+  },
+  {
+   "q": "E38",
+   "name": "The Pier",
+   "tier": 4,
+   "inputs": [
+    "cathay the pier"
+   ]
+  },
+  {
+   "q": "G127",
+   "name": "Rendezvous",
+   "tier": 5,
+   "inputs": [
+    "rendezvous",
+    "rendezvous tail",
+    "rendez-vous",
+    "hong kong tail"
+   ]
+  },
+  {
+   "q": "G127",
+   "name": "Blue Poole",
+   "tier": 4,
+   "inputs": [
+    "blue poole",
+    "poole",
+    "poole pottery tail",
+    "blue pool"
+   ]
+  },
+  {
+   "q": "G127",
+   "name": "Wunala Dreaming",
+   "tier": 5,
+   "inputs": [
+    "wunala dreaming",
+    "wunala",
+    "wunala dreaming tail"
+   ]
+  },
+  {
+   "q": "G127",
+   "name": "Whale Rider",
+   "tier": 5,
+   "inputs": [
+    "whale rider",
+    "whale rider tail",
+    "whalerider",
+    "canada tail"
+   ]
+  },
+  {
+   "q": "G127",
+   "name": "Water Dreaming",
+   "tier": 5,
+   "inputs": [
+    "water dreaming",
+    "ngapa jukurrpa",
+    "water dreaming tail",
+    "aboriginal tail"
+   ]
+  },
+  {
+   "q": "F108",
+   "name": "RAF Museum",
+   "tier": 1,
+   "inputs": [
+    "raf museum hendon"
+   ]
+  },
+  {
+   "q": "F108",
+   "name": "Pima Air and Space Museum",
+   "tier": 3,
+   "inputs": [
+    "pima air and space"
+   ]
+  },
+  {
+   "q": "E95",
+   "name": "Pod",
+   "tier": 3,
+   "inputs": [
+    "first class suite"
+   ]
+  },
+  {
+   "q": "A12",
+   "name": "Gimli Glider",
+   "tier": 3,
+   "inputs": [
+    "gimli glider",
+    "the gimli glider",
+    "gimli",
+    "air canada 143",
+    "air canada flight 143",
+    "gimli glider 767"
+   ]
+  },
+  {
+   "q": "E103",
+   "name": "Air conditioning",
+   "tier": 3,
+   "inputs": [
+    "air con hiss"
+   ]
+  },
+  {
+   "q": "E103",
+   "name": "Landing gear",
+   "tier": 2,
+   "inputs": [
+    "landing gear going down"
+   ]
+  },
+  {
+   "q": "E103",
+   "name": "PTU bark",
+   "tier": 4,
+   "inputs": [
+    "a320 ptu barking"
+   ]
+  },
+  {
+   "q": "D86",
+   "name": "Holding point",
+   "tier": 3,
+   "inputs": [
+    "holding point markings"
+   ]
+  },
+  {
+   "q": "E124",
+   "name": "Aerosols",
+   "tier": 3,
+   "inputs": [
+    "sulphate aerosols"
+   ]
+  },
+  {
+   "q": "E124",
+   "name": "Methane reduction",
+   "tier": 5,
+   "inputs": [
+    "methane depletion"
+   ]
+  },
+  {
+   "q": "E124",
+   "name": "Aerosols",
+   "tier": 3,
+   "inputs": [
+    "sulphur aerosols"
+   ]
+  },
+  {
+   "q": "E124",
+   "name": "Aerosols",
+   "tier": 3,
+   "inputs": [
+    "aerosol-cloud interaction"
+   ]
+  },
+  {
+   "q": "A01",
+   "name": "BAe 146",
+   "tier": 4,
+   "inputs": [
+    "avro rj100"
+   ]
+  },
+  {
+   "q": "G131",
+   "name": "Upgrade voucher",
+   "tier": 3,
+   "inputs": [
+    "gold upgrade voucher"
+   ]
+  },
+  {
+   "q": "G135",
+   "name": "Hampton",
+   "tier": 4,
+   "inputs": [
+    "hampton",
+    "hampton tw12",
+    "hampton middlesex",
+    "hampton village",
+    "hampton hill"
+   ]
+  },
+  {
+   "q": "G135",
+   "name": "Myrtle Avenue",
+   "tier": 4,
+   "inputs": [
+    "myrtle avenue",
+    "myrtle ave",
+    "myrtle avenue hounslow",
+    "myrtle av",
+    "myrtle avenue spotting"
+   ]
+  },
+  {
+   "q": "E121",
+   "name": "Phillips 66",
+   "tier": 3,
+   "inputs": [
+    "phillips 66 humber"
+   ]
+  },
+  {
+   "q": "E91",
+   "name": "Breakfast",
+   "tier": 1,
+   "inputs": [
+    "full english breakfast"
+   ]
+  },
+  {
+   "q": "E91",
+   "name": "Cheese and crackers",
+   "tier": 2,
+   "inputs": [
+    "cheese and biscuits"
+   ]
+  },
+  {
+   "q": "E91",
+   "name": "Lobster",
+   "tier": 5,
+   "inputs": [
+    "lobster thermidor"
+   ]
+  },
+  {
+   "q": "B68",
+   "name": "Cyprus Airways",
+   "tier": 4,
+   "inputs": [
+    "cyprus airways",
+    "cyprus air",
+    "cyprus airlines",
+    "cyprus airways mouflon",
+    "kyprus airways"
+   ]
+  },
+  {
+   "q": "B68",
+   "name": "Air Jamaica",
+   "tier": 3,
+   "inputs": [
+    "air jamaica",
+    "air jamacia",
+    "airjamaica",
+    "air jamaica hummingbird",
+    "jamaica airways"
+   ]
+  },
+  {
+   "q": "B68",
+   "name": "Eastern Air Lines",
+   "tier": 5,
+   "inputs": [
+    "eastern air lines",
+    "eastern airlines",
+    "eastern",
+    "eastern air",
+    "eastern falcon"
+   ]
+  },
+  {
+   "q": "E90",
+   "name": "Singapore Sling",
+   "tier": 4,
+   "inputs": [
+    "singapore sling",
+    "singapore sling cocktail",
+    "singapore slings",
+    "sling",
+    "singapore airlines sling"
+   ]
+  },
+  {
+   "q": "E125",
+   "name": "Used cooking oil",
+   "tier": 3,
+   "inputs": [
+    "used cooking oil",
+    "cooking oil",
+    "uco",
+    "waste cooking oil",
+    "chip fat",
+    "frying oil",
+    "used oil from catering"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "London Heathrow (LHR)",
+   "tier": 1,
+   "inputs": [
+    "lhr heathrow"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "London Gatwick (LGW)",
+   "tier": 1,
+   "inputs": [
+    "lgw gatwick"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "London City (LCY)",
+   "tier": 2,
+   "inputs": [
+    "lcy london city"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "London Luton (LTN)",
+   "tier": 2,
+   "inputs": [
+    "ltn luton"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "Liverpool John Lennon (LPL)",
+   "tier": 3,
+   "inputs": [
+    "lpl liverpool"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "Leeds Bradford (LBA)",
+   "tier": 3,
+   "inputs": [
+    "lba leeds bradford"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "Los Angeles (LAX)",
+   "tier": 1,
+   "inputs": [
+    "lax los angeles"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "Lisbon Humberto Delgado (LIS)",
+   "tier": 2,
+   "inputs": [
+    "lis lisbon"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "Larnaca (LCA)",
+   "tier": 3,
+   "inputs": [
+    "lca larnaca"
+   ]
+  },
+  {
+   "q": "C20",
+   "name": "Ljubljana Jože Pučnik (LJU)",
+   "tier": 3,
+   "inputs": [
+    "lju ljubljana"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7700",
+   "tier": 1,
+   "inputs": [
+    "7700 emergency"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7500",
+   "tier": 1,
+   "inputs": [
+    "7500 hijack"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7600",
+   "tier": 1,
+   "inputs": [
+    "7600 radio failure"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7000",
+   "tier": 2,
+   "inputs": [
+    "7000 conspicuity"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "1200",
+   "tier": 1,
+   "inputs": [
+    "1200 vfr"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7004",
+   "tier": 5,
+   "inputs": [
+    "7004 aerobatics"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "0033",
+   "tier": 5,
+   "inputs": [
+    "0033 parachuting"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7010",
+   "tier": 5,
+   "inputs": [
+    "7010 circuit traffic"
+   ]
+  },
+  {
+   "q": "D79",
+   "name": "7400",
+   "tier": 4,
+   "inputs": [
+    "7400 uas lost link"
+   ]
+  },
+  {
+   "q": "B160",
+   "name": "Cedar tree",
+   "tier": 3,
+   "inputs": [
+    "cedar tree",
+    "cedar",
+    "lebanese cedar",
+    "cedar of lebanon",
+    "mea cedar"
+   ]
+  },
+  {
+   "q": "B160",
+   "name": "Brushwing",
+   "tier": 4,
+   "inputs": [
+    "brushwing",
+    "brush wing",
+    "brush-wing",
+    "cathay brushwing",
+    "cathay pacific brushwing",
+    "cathay wing"
+   ]
+  },
+  {
+   "q": "B160",
+   "name": "Flower",
+   "tier": 3,
+   "inputs": [
+    "orchid"
+   ]
+  },
+  {
+   "q": "E120",
+   "name": "IAG Flightpath Net Zero",
+   "tier": 4,
+   "inputs": [
+    "flightpath to net zero"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "BA",
+   "tier": 1,
+   "inputs": [
+    "ba british airways"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "FR",
+   "tier": 2,
+   "inputs": [
+    "fr ryanair"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "U2",
+   "tier": 2,
+   "inputs": [
+    "u2 easyjet"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "VS",
+   "tier": 2,
+   "inputs": [
+    "vs virgin atlantic"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "EI",
+   "tier": 2,
+   "inputs": [
+    "ei aer lingus"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "LH",
+   "tier": 2,
+   "inputs": [
+    "lh lufthansa"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "EK",
+   "tier": 2,
+   "inputs": [
+    "ek emirates"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "QF",
+   "tier": 3,
+   "inputs": [
+    "qf qantas"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "LM",
+   "tier": 5,
+   "inputs": [
+    "lm loganair"
+   ]
+  },
+  {
+   "q": "B19",
+   "name": "BY",
+   "tier": 3,
+   "inputs": [
+    "by tui"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Ask nicely",
+   "tier": 1,
+   "inputs": [
+    "ask nicely at check-in"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Dress smart",
+   "tier": 1,
+   "inputs": [
+    "dress smartly"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Volunteer to be bumped",
+   "tier": 4,
+   "inputs": [
+    "volunteer when overbooked"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Book a flexible fare",
+   "tier": 4,
+   "inputs": [
+    "book full fare"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Frequent flyer status",
+   "tier": 1,
+   "inputs": [
+    "have status"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Pay for it",
+   "tier": 1,
+   "inputs": [
+    "pay at check-in"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Operational upgrade",
+   "tier": 3,
+   "inputs": [
+    "economy oversold"
+   ]
+  },
+  {
+   "q": "E104",
+   "name": "Upgrade voucher",
+   "tier": 3,
+   "inputs": [
+    "gold upgrade voucher"
+   ]
+  },
+  {
+   "q": "A159",
+   "name": "Embraer E2",
+   "tier": 3,
+   "inputs": [
+    "e2 jet"
+   ]
+  },
+  {
+   "q": "F110",
+   "name": "Gimli Glider",
+   "tier": 3,
+   "inputs": [
+    "gimli glider",
+    "the gimli glider",
+    "gimli",
+    "air canada 143",
+    "c-gaun",
+    "gimli glider 767"
+   ]
+  },
+  {
+   "q": "E93",
+   "name": "Escape slides",
+   "tier": 3,
+   "inputs": [
+    "inflatable slide"
+   ]
+  },
+  {
+   "q": "C23",
+   "name": "St. Mary's (ISC)",
+   "tier": 5,
+   "inputs": [
+    "st mary's scilly"
+   ]
+  },
+  {
+   "q": "A09",
+   "name": "Bristol 188",
+   "tier": 5,
+   "inputs": [
+    "bristol 188",
+    "bristol type 188",
+    "type 188",
+    "flaming pencil",
+    "bristol 188 research aircraft"
+   ]
+  },
+  {
+   "q": "C71",
+   "name": "Josep Tarradellas Barcelona-El Prat (BCN)",
+   "tier": 1,
+   "inputs": [
+    "barcelona el prat"
+   ]
+  },
+  {
+   "q": "C71",
+   "name": "Cristiano Ronaldo (FNC)",
+   "tier": 3,
+   "inputs": [
+    "madeira"
+   ]
+  },
+  {
+   "q": "C71",
+   "name": "Courchevel Altiport (CVF)",
+   "tier": 4,
+   "inputs": [
+    "courchevel altiport (cvf)",
+    "courchevel",
+    "cvf",
+    "courchevel altiport",
+    "courchevel airport",
+    "altiport courchevel",
+    "courcheval"
+   ]
+  },
+  {
+   "q": "D83",
+   "name": "Radar approach",
+   "tier": 3,
+   "inputs": [
+    "radar approach",
+    "radar approaches",
+    "radar-guided approach",
+    "ground radar approach",
+    "radar controlled approach"
+   ]
+  },
+  {
+   "q": "E40",
+   "name": "Green taxiing",
+   "tier": 2,
+   "inputs": [
+    "single engine taxiing"
+   ]
+  },
+  {
+   "q": "F117",
+   "name": "Cathay Pacific Flight 780",
+   "tier": 4,
+   "inputs": [
+    "cathay pacific 780"
+   ]
+  },
+  {
+   "q": "F117",
+   "name": "BA9 (Jakarta incident)",
+   "tier": 3,
+   "inputs": [
+    "ba9 jakarta"
+   ]
+  },
+  {
+   "q": "D50",
+   "name": "Whitegate",
+   "tier": 5,
+   "inputs": [
+    "whitegate",
+    "whi",
+    "whitegate ndb",
+    "whitegate beacon",
+    "whitegate fix"
+   ]
+  },
+  {
+   "q": "G138",
+   "name": "The Face",
+   "tier": 2,
+   "inputs": [
+    "faces ad"
+   ]
+  },
+  {
+   "q": "D84",
+   "name": "Luton Approach",
+   "tier": 4,
+   "inputs": [
+    "luton radar"
+   ]
+  },
+  {
+   "q": "D84",
+   "name": "Edinburgh Tower",
+   "tier": 4,
+   "inputs": [
+    "edinburgh tower",
+    "edinburgh twr",
+    "edi tower",
+    "edinburgh tower atc"
+   ]
+  },
+  {
+   "q": "G132",
+   "name": "Heathrow Terminal 5",
+   "tier": 1,
+   "inputs": [
+    "heathrow t5"
+   ]
+  },
+  {
+   "q": "G132",
+   "name": "BA Maintenance Cardiff",
+   "tier": 3,
+   "inputs": [
+    "cardiff engineering base"
+   ]
+  },
+  {
+   "q": "G132",
+   "name": "Gatwick",
+   "tier": 1,
+   "inputs": [
+    "gatwick north terminal"
+   ]
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "julie mcodnalds",
+    "julian mcdonald"
+   ],
+   "name": "Julien Macdonald",
+   "tier": 1
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "badge"
+   ],
+   "name": "Name badge",
+   "tier": 2
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "pin"
+   ],
+   "name": "Speedbird pin",
+   "tier": 4
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "pinny"
+   ],
+   "name": "Pinafore",
+   "tier": 4
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "top"
+   ],
+   "name": "Shirt",
+   "tier": 1
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "belt"
+   ],
+   "name": "Belt",
+   "tier": 2
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "socks"
+   ],
+   "name": "Socks",
+   "tier": 2
+  },
+  {
+   "q": "G139",
+   "inputs": [
+    "braces"
+   ],
+   "name": "Braces",
+   "tier": 2
+  },
+  {
+   "q": "B64",
+   "inputs": [
+    "india"
+   ],
+   "name": "Air India",
+   "tier": 2
+  },
+  {
+   "q": "D82",
+   "inputs": [
+    "engine blade fans"
+   ],
+   "name": "Engines",
+   "tier": 1
+  },
+  {
+   "q": "A54",
+   "inputs": [
+    "an-224",
+    "an-124"
+   ],
+   "name": "Antonov An-124",
+   "tier": 3
+  },
+  {
+   "q": "E37",
+   "inputs": [
+    "sustainability exec"
+   ],
+   "name": "Sustainability manager",
+   "tier": 4
+  },
+  {
+   "q": "E37",
+   "inputs": [
+    "senior manager customer operations",
+    "operations"
+   ],
+   "name": "Customer operations",
+   "tier": 4
+  },
+  {
+   "q": "E37",
+   "inputs": [
+    "route planner"
+   ],
+   "name": "Network controller",
+   "tier": 4
+  },
+  {
+   "q": "B66",
+   "inputs": [
+    "tanya club"
+   ],
+   "name": "Tabua Club",
+   "tier": 4
+  },
+  {
+   "q": "E34",
+   "inputs": [
+    "face mist"
+   ],
+   "name": "Face mist",
+   "tier": 4
+  },
+  {
+   "q": "H144",
+   "inputs": [
+    "disney world florida"
+   ],
+   "name": "Walt Disney World",
+   "tier": 1
   }
  ]
 }
